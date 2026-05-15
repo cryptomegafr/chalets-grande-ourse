@@ -69,40 +69,27 @@ window.addEventListener('load', () => {
 });
 
 // ====================================================
-//  LENIS — Smooth scroll
+//  SMOOTH SCROLL (natif, rapide)
 // ====================================================
-let lenis;
-if (typeof Lenis !== 'undefined') {
-  lenis = new Lenis({
-    duration: 0.8,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    smoothTouch: false,
-    wheelMultiplier: 1.4,
-    touchMultiplier: 2
-  });
+// Lenis désactivé pour un scroll plus réactif
+let lenis = null;
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // Lien d'ancre → scroll smooth via Lenis
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        lenis.scrollTo(target, { offset: -80, duration: 1 });
-        // Fermer menu mobile si ouvert
-        document.getElementById('mobileMenu').classList.remove('open');
-        document.getElementById('menuBurger').classList.remove('open');
-        document.body.classList.remove('lock');
-      }
-    });
+// Scroll smooth sur les liens d'ancre (natif)
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+      // Fermer menu mobile si ouvert
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('menuBurger').classList.remove('open');
+      document.body.classList.remove('lock');
+    }
   });
-}
+});
 
 // ====================================================
 //  NAVIGATION — Comportement au scroll
@@ -188,12 +175,7 @@ if (typeof lucide !== 'undefined') {
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
   
-  // Sync Lenis ↔ ScrollTrigger
-  if (lenis) {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-  }
+  // (Lenis désactivé — GSAP utilise le scroll natif directement)
   
   // Compteurs animés
   document.querySelectorAll('.stat-num[data-target]').forEach(el => {
