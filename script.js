@@ -7,14 +7,14 @@
 // ====================================================
 const CONFIG = {
   // Adresse email où tu reçois les demandes de réservation
-  email: 'contact@exemple.com',                          // <-- À REMPLACER
+  email: 'pi.beaulier@gmail.com',
   
   // Numéro WhatsApp au format international SANS le +
   // Exemple : "33612345678" pour +33 6 12 34 56 78
-  whatsapp: '33612345678',                               // <-- À REMPLACER
+  whatsapp: '33607499945',
   
   // Affichage joli du numéro WhatsApp (avec espaces)
-  whatsappDisplay: '+33 6 12 34 56 78',                  // <-- À REMPLACER
+  whatsappDisplay: '+33 6 07 49 99 45',
   
   // EmailJS — Crée un compte gratuit sur https://emailjs.com
   // Puis remplace les 3 valeurs ci-dessous (cf. README)
