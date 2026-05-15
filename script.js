@@ -54,19 +54,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ====================================================
-//  LOADER
+//  LOADER (robuste — se ferme dans tous les cas)
 // ====================================================
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const loader = document.getElementById('loader');
-    loader.classList.add('gone');
-    document.querySelector('.hero').classList.add('loaded');
-    
-    setTimeout(() => {
-      loader.style.display = 'none';
-    }, 800);
-  }, 2400);
+function hideLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader || loader.classList.contains('gone')) return;
+  loader.classList.add('gone');
+  const heroEl = document.querySelector('.hero');
+  if (heroEl) heroEl.classList.add('loaded');
+  setTimeout(() => { loader.style.display = 'none'; }, 800);
+}
+
+// Tentative 1 : au DOMContentLoaded (très rapide)
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(hideLoader, 2000);
 });
+
+// Tentative 2 : au load complet (sécurité)
+window.addEventListener('load', () => {
+  setTimeout(hideLoader, 500);
+});
+
+// Tentative 3 : timeout absolu (dernier recours, 4s max)
+setTimeout(hideLoader, 4000);
 
 // ====================================================
 //  SCROLL (100% natif, pas de smooth)
@@ -513,5 +523,4 @@ ${name}`;
   
   submit.disabled = false;
   submit.querySelector('span').textContent = originalText;
-});
 });
