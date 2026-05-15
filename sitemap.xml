@@ -4,32 +4,32 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
   <url>
-    <loc>https://cryptomegafr.github.io/chalets-grande-ourse/</loc>
+    <loc>https://chaletastro.com/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cryptomegafr.github.io/chalets-grande-ourse/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cryptomegafr.github.io/chalets-grande-ourse/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://chaletastro.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chaletastro.com/"/>
     
     <image:image>
-      <image:loc>https://cryptomegafr.github.io/chalets-grande-ourse/images/16-jacuzzi-vue.jpg</image:loc>
+      <image:loc>https://chaletastro.com/images/16-jacuzzi-vue.jpg</image:loc>
       <image:title>Chalet ASTRO La Plagne Montalbert - Jacuzzi extérieur vue panoramique</image:title>
       <image:caption>Jacuzzi extérieur avec vue sur les Alpes</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://cryptomegafr.github.io/chalets-grande-ourse/images/13-facade-jour.jpg</image:loc>
+      <image:loc>https://chaletastro.com/images/13-facade-jour.jpg</image:loc>
       <image:title>Chalet ASTRO La Plagne Montalbert - Façade bois et pierre</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://cryptomegafr.github.io/chalets-grande-ourse/images/01-salle-manger-vue.jpg</image:loc>
+      <image:loc>https://chaletastro.com/images/01-salle-manger-vue.jpg</image:loc>
       <image:title>Chalet ASTRO - Salle à manger panoramique</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://cryptomegafr.github.io/chalets-grande-ourse/images/06-suite-vue.jpg</image:loc>
+      <image:loc>https://chaletastro.com/images/06-suite-vue.jpg</image:loc>
       <image:title>Chalet ASTRO - Suite avec vue montagne</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://cryptomegafr.github.io/chalets-grande-ourse/images/12-terrasse-vue.jpg</image:loc>
+      <image:loc>https://chaletastro.com/images/12-terrasse-vue.jpg</image:loc>
       <image:title>Chalet ASTRO - Terrasse en mélèze face aux Alpes</image:title>
     </image:image>
   </url>
