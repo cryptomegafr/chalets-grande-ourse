@@ -211,16 +211,17 @@ body::before {
 }
 
 .logo-line-1 {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.7;
 }
 
 .logo-line-2 {
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
   margin-top: 0.2em;
+  font-weight: 500;
 }
 
 .nav-links {
