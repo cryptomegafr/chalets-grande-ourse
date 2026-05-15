@@ -304,6 +304,29 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     }
   });
   
+  // Testimonials
+  gsap.from('.testimonial', {
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.12,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.testimonials-grid',
+      start: 'top 80%'
+    }
+  });
+  gsap.from('.testimonials-rating', {
+    y: 20,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.testimonials-rating',
+      start: 'top 88%'
+    }
+  });
+  
   // Hero parallax sur l'image
   gsap.to('.hero-image', {
     yPercent: 15,
