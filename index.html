@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chalets de la Grande Ourse — Chalet d'exception à La Plagne Montalbert</title>
+<meta name="description" content="Chalet d'exception ski au pied à La Plagne Montalbert. 12 voyageurs, 6 chambres, jacuzzi extérieur, vue panoramique sur les Alpes. Construction 2024." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Chalets de la Grande Ourse — La Plagne Montalbert" />
+<meta property="og:description" content="Chalet d'exception ski au pied. 12 voyageurs · 6 chambres · jacuzzi · vue panoramique." />
+<meta property="og:image" content="images/13-facade-jour.jpg" />
+<meta property="og:type" content="website" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f0d0a'/%3E%3Cpath d='M20 70 L35 40 L50 55 L65 30 L80 70 Z' fill='%23d4a574' stroke='%23d4a574' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<!-- Polices : Fraunces (display sérif élégant) + Inter Tight (corps moderne) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<!-- Flatpickr (calendrier) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/themes/airbnb.css" />
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/fr.js" defer></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Lenis (smooth scroll) -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============== LOADER ============== -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 75 L32 38 L48 56 L65 28 L85 75 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <div class="loader-text">
+      <span>C</span><span>H</span><span>A</span><span>L</span><span>E</span><span>T</span><span>S</span>
+      <span class="loader-sep">·</span>
+      <span>G</span><span>R</span><span>A</span><span>N</span><span>D</span><span>E</span>
+      <span class="loader-sep">·</span>
+      <span>O</span><span>U</span><span>R</span><span>S</span><span>E</span>
+    </div>
+    <div class="loader-progress"><span></span></div>
+  </div>
+</div>
+
+<!-- ============== NAV ============== -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+      <path d="M15 75 L32 38 L48 56 L65 28 L85 75 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">
+      <span class="logo-line-1">Chalets de la</span>
+      <span class="logo-line-2">Grande Ourse</span>
+    </span>
+  </a>
+
+  <nav class="nav-links">
+    <a href="#manifesto" data-fr="Le chalet" data-en="The chalet">Le chalet</a>
+    <a href="#gallery" data-fr="Galerie" data-en="Gallery">Galerie</a>
+    <a href="#spaces" data-fr="Espaces" data-en="Spaces">Espaces</a>
+    <a href="#location" data-fr="Localisation" data-en="Location">Localisation</a>
+    <a href="#booking" data-fr="Réserver" data-en="Book" class="nav-cta">Réserver</a>
+  </nav>
+
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" aria-label="Changer de langue">
+      <span class="lang-current">FR</span>
+      <span class="lang-sep">/</span>
+      <span class="lang-alt">EN</span>
+    </button>
+    <button class="menu-burger" id="menuBurger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#manifesto" data-fr="Le chalet" data-en="The chalet">Le chalet</a>
+  <a href="#gallery" data-fr="Galerie" data-en="Gallery">Galerie</a>
+  <a href="#spaces" data-fr="Espaces" data-en="Spaces">Espaces</a>
+  <a href="#location" data-fr="Localisation" data-en="Location">Localisation</a>
+  <a href="#booking" data-fr="Réserver" data-en="Book">Réserver</a>
+</div>
+
+<main id="top">
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="images/16-jacuzzi-vue.jpg" alt="Vue depuis la terrasse du chalet" class="hero-image" />
+    <div class="hero-grain"></div>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="line"></span>
+      <span data-fr="La Plagne Montalbert · Savoie" data-en="La Plagne Montalbert · French Alps">La Plagne Montalbert · Savoie</span>
+      <span class="line"></span>
+    </div>
+    <h1 class="hero-title">
+      <span class="word">Chalets</span>
+      <span class="word"><em>de la</em></span>
+      <span class="word">Grande</span>
+      <span class="word">Ourse</span>
+    </h1>
+    <p class="hero-sub" data-fr="Un refuge d'altitude. Ski au pied. Vue sans fin sur les Alpes."
+                       data-en="An altitude retreat. Ski-in ski-out. Endless views over the Alps.">
+      Un refuge d'altitude. Ski au pied. Vue sans fin sur les Alpes.
+    </p>
+
+    <div class="hero-meta">
+      <div><strong>12</strong><span data-fr="voyageurs" data-en="guests">voyageurs</span></div>
+      <div class="dot"></div>
+      <div><strong>6</strong><span data-fr="chambres" data-en="bedrooms">chambres</span></div>
+      <div class="dot"></div>
+      <div><strong>5</strong><span data-fr="salles de bain" data-en="bathrooms">salles de bain</span></div>
+      <div class="dot"></div>
+      <div><strong>2024</strong><span data-fr="construction" data-en="built">construction</span></div>
+    </div>
+
+    <a href="#booking" class="hero-cta">
+      <span data-fr="Vérifier les disponibilités" data-en="Check availability">Vérifier les disponibilités</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <span data-fr="Découvrir" data-en="Discover">Découvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============== MANIFESTO ============== -->
+<section class="manifesto" id="manifesto">
+  <div class="manifesto-tag" data-fr="— Manifeste" data-en="— Manifesto">— Manifeste</div>
+  <p class="manifesto-text"
+     data-fr="Imaginé en 2024, posé à 1 350 mètres d'altitude, le chalet épouse la montagne sans jamais la dominer. Bois bruts, pierre sèche, baies vitrées sur la vallée — chaque détail invite à <em>ralentir</em>, à <em>habiter</em> le paysage. Skis aux pieds le matin, jacuzzi face aux sommets le soir. C'est tout."
+     data-en="Conceived in 2024, set at 1,350 meters of altitude, the chalet embraces the mountain without ever overpowering it. Raw wood, dry stone, glass walls opening onto the valley — every detail invites you to <em>slow down</em>, to <em>inhabit</em> the landscape. Skis on at dawn, hot tub facing the peaks at dusk. That's all.">
+    Imaginé en 2024, posé à 1 350 mètres d'altitude, le chalet épouse la montagne sans jamais la dominer. Bois bruts, pierre sèche, baies vitrées sur la vallée — chaque détail invite à <em>ralentir</em>, à <em>habiter</em> le paysage. Skis aux pieds le matin, jacuzzi face aux sommets le soir. C'est tout.
+  </p>
+</section>
+
+<!-- ============== STATS ============== -->
+<section class="stats">
+  <div class="stat">
+    <div class="stat-num" data-target="12">0</div>
+    <div class="stat-label" data-fr="Voyageurs" data-en="Guests">Voyageurs</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="6">0</div>
+    <div class="stat-label" data-fr="Chambres" data-en="Bedrooms">Chambres</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="5">0</div>
+    <div class="stat-label" data-fr="Salles de bain" data-en="Bathrooms">Salles de bain</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-target="3">0</div>
+    <div class="stat-label" data-fr="Parkings" data-en="Parkings">Parkings</div>
+  </div>
+  <div class="stat stat-wide">
+    <div class="stat-num small">0m</div>
+    <div class="stat-label" data-fr="Ski au pied" data-en="Ski-in ski-out">Ski au pied</div>
+  </div>
+</section>
+
+<!-- ============== GALLERY ============== -->
+<section class="gallery" id="gallery">
+  <div class="section-head">
+    <div class="section-tag" data-fr="— Galerie" data-en="— Gallery">— Galerie</div>
+    <h2 class="section-title" data-fr="Un écrin de bois <em>&amp; de lumière</em>"
+                              data-en="A nest of wood <em>&amp; light</em>">
+      Un écrin de bois <em>& de lumière</em>
+    </h2>
+  </div>
+
+  <div class="swiper gallery-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="images/16-jacuzzi-vue.jpg" alt="Jacuzzi extérieur avec vue panoramique"/><span class="slide-cap" data-fr="Jacuzzi face aux sommets" data-en="Hot tub facing the summits">Jacuzzi face aux sommets</span></div>
+      <div class="swiper-slide"><img src="images/01-salle-manger-vue.jpg" alt="Salle à manger avec baies vitrées"/><span class="slide-cap" data-fr="Salle à manger panoramique" data-en="Panoramic dining room">Salle à manger panoramique</span></div>
+      <div class="swiper-slide"><img src="images/06-suite-vue.jpg" alt="Suite avec vue montagne"/><span class="slide-cap" data-fr="Suite avec vue montagne" data-en="Suite with mountain view">Suite avec vue montagne</span></div>
+      <div class="swiper-slide"><img src="images/12-terrasse-vue.jpg" alt="Terrasse en bois"/><span class="slide-cap" data-fr="Terrasse en mélèze" data-en="Larch wood terrace">Terrasse en mélèze</span></div>
+      <div class="swiper-slide"><img src="images/13-facade-jour.jpg" alt="Façade extérieure du chalet"/><span class="slide-cap" data-fr="Façade en bois et pierre" data-en="Wood and stone façade">Façade en bois et pierre</span></div>
+      <div class="swiper-slide"><img src="images/07-suite-parentale.jpg" alt="Suite parentale"/><span class="slide-cap" data-fr="Suite parentale" data-en="Master suite">Suite parentale</span></div>
+      <div class="swiper-slide"><img src="images/02-chambre-bleue.jpg" alt="Chambre bleue"/><span class="slide-cap" data-fr="Chambre Indigo" data-en="Indigo room">Chambre Indigo</span></div>
+      <div class="swiper-slide"><img src="images/04-chambre-terracotta.jpg" alt="Chambre terracotta"/><span class="slide-cap" data-fr="Chambre Terracotta" data-en="Terracotta room">Chambre Terracotta</span></div>
+      <div class="swiper-slide"><img src="images/09-chambre-bois.jpg" alt="Chambre en bois"/><span class="slide-cap" data-fr="Chambre Cembro" data-en="Cembro room">Chambre Cembro</span></div>
+      <div class="swiper-slide"><img src="images/11-chambre-twins.jpg" alt="Chambre lits jumeaux"/><span class="slide-cap" data-fr="Chambre Azur" data-en="Azure room">Chambre Azur</span></div>
+      <div class="swiper-slide"><img src="images/05-sdb-baignoire.jpg" alt="Salle de bain avec baignoire"/><span class="slide-cap" data-fr="Salle de bain avec baignoire" data-en="Bathtub bathroom">Salle de bain avec baignoire</span></div>
+      <div class="swiper-slide"><img src="images/08-sdb-mosaique.jpg" alt="Salle de bain mosaïque"/><span class="slide-cap" data-fr="Mosaïque iridescente" data-en="Iridescent mosaic">Mosaïque iridescente</span></div>
+      <div class="swiper-slide"><img src="images/10-sdb-design.jpg" alt="Salle de bain design"/><span class="slide-cap" data-fr="Salle de bain ardoise" data-en="Slate bathroom">Salle de bain ardoise</span></div>
+      <div class="swiper-slide"><img src="images/03-sdb-noire.jpg" alt="Salle de bain noire"/><span class="slide-cap" data-fr="Salle de bain noir mat" data-en="Matte black bathroom">Salle de bain noir mat</span></div>
+      <div class="swiper-slide"><img src="images/14-facade-arriere.jpg" alt="Façade arrière du chalet"/><span class="slide-cap" data-fr="Vue arrière depuis la forêt" data-en="Rear view from the forest">Vue arrière depuis la forêt</span></div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+<!-- ============== SPACES (alternance image / texte) ============== -->
+<section class="spaces" id="spaces">
+  <div class="section-head">
+    <div class="section-tag" data-fr="— Les espaces" data-en="— The spaces">— Les espaces</div>
+    <h2 class="section-title" data-fr="Six chambres, <em>cinq atmosphères</em>"
+                              data-en="Six bedrooms, <em>five atmospheres</em>">
+      Six chambres, <em>cinq atmosphères</em>
+    </h2>
+  </div>
+
+  <article class="space space-left">
+    <div class="space-img"><img src="images/06-suite-vue.jpg" alt="Suite avec vue" /></div>
+    <div class="space-text">
+      <span class="space-num">01</span>
+      <h3 data-fr="Suite Panorama" data-en="Panorama Suite">Suite Panorama</h3>
+      <p data-fr="Lit king-size face à la baie vitrée. Sortie directe sur la terrasse et le jacuzzi. La montagne s'invite jusque dans les draps."
+         data-en="King-size bed facing the picture window. Direct access to the terrace and hot tub. The mountain reaches all the way to your sheets.">
+        Lit king-size face à la baie vitrée. Sortie directe sur la terrasse et le jacuzzi. La montagne s'invite jusque dans les draps.
+      </p>
+    </div>
+  </article>
+
+  <article class="space space-right">
+    <div class="space-img"><img src="images/02-chambre-bleue.jpg" alt="Chambre Indigo" /></div>
+    <div class="space-text">
+      <span class="space-num">02</span>
+      <h3 data-fr="Chambre Indigo" data-en="Indigo Room">Chambre Indigo</h3>
+      <p data-fr="Bois clair, mur d'accent bleu profond, espace bureau. Pour ceux qui travaillent — ou prolongent — l'évasion."
+         data-en="Light wood, deep blue accent wall, work nook. For those who work — or extend — the escape.">
+        Bois clair, mur d'accent bleu profond, espace bureau. Pour ceux qui travaillent — ou prolongent — l'évasion.
+      </p>
+    </div>
+  </article>
+
+  <article class="space space-left">
+    <div class="space-img"><img src="images/04-chambre-terracotta.jpg" alt="Chambre Terracotta" /></div>
+    <div class="space-text">
+      <span class="space-num">03</span>
+      <h3 data-fr="Chambre Terracotta" data-en="Terracotta Room">Chambre Terracotta</h3>
+      <p data-fr="La chaleur de l'argile cuite, la douceur du lin. Une fenêtre haute laisse glisser la lumière du matin sur les murs."
+         data-en="The warmth of fired clay, the softness of linen. A high window lets the morning light slide down the walls.">
+        La chaleur de l'argile cuite, la douceur du lin. Une fenêtre haute laisse glisser la lumière du matin sur les murs.
+      </p>
+    </div>
+  </article>
+
+  <article class="space space-right">
+    <div class="space-img"><img src="images/01-salle-manger-vue.jpg" alt="Salle à manger" /></div>
+    <div class="space-text">
+      <span class="space-num">04</span>
+      <h3 data-fr="Salle à manger panoramique" data-en="Panoramic dining">Salle à manger panoramique</h3>
+      <p data-fr="Une grande table pour douze, encadrée par deux baies coulissantes ouvertes sur la vallée. C'est ici que les journées commencent et finissent."
+         data-en="A large table for twelve, framed by two sliding glass doors opening onto the valley. This is where days begin and end.">
+        Une grande table pour douze, encadrée par deux baies coulissantes ouvertes sur la vallée. C'est ici que les journées commencent et finissent.
+      </p>
+    </div>
+  </article>
+
+  <article class="space space-left">
+    <div class="space-img"><img src="images/16-jacuzzi-vue.jpg" alt="Jacuzzi extérieur" /></div>
+    <div class="space-text">
+      <span class="space-num">05</span>
+      <h3 data-fr="Jacuzzi extérieur" data-en="Outdoor hot tub">Jacuzzi extérieur</h3>
+      <p data-fr="Posé sur la terrasse, ouvert sur le massif. L'eau chaude, la neige, le silence — la trinité des soirées de chalet."
+         data-en="Set on the terrace, opening onto the massif. Hot water, snow, silence — the trinity of chalet evenings.">
+        Posé sur la terrasse, ouvert sur le massif. L'eau chaude, la neige, le silence — la trinité des soirées de chalet.
+      </p>
+    </div>
+  </article>
+</section>
+
+<!-- ============== AMENITIES ============== -->
+<section class="amenities">
+  <div class="section-head">
+    <div class="section-tag" data-fr="— Équipements &amp; services" data-en="— Amenities &amp; services">— Équipements & services</div>
+    <h2 class="section-title" data-fr="Tout est <em>déjà là</em>" data-en="Everything is <em>already here</em>">
+      Tout est <em>déjà là</em>
+    </h2>
+  </div>
+
+  <div class="amenities-grid">
+    <div class="amenity"><i data-lucide="snowflake"></i><span data-fr="Ski au pied" data-en="Ski-in ski-out">Ski au pied</span></div>
+    <div class="amenity"><i data-lucide="waves"></i><span data-fr="Jacuzzi extérieur" data-en="Outdoor hot tub">Jacuzzi extérieur</span></div>
+    <div class="amenity"><i data-lucide="mountain"></i><span data-fr="Vue panoramique" data-en="Panoramic view">Vue panoramique</span></div>
+    <div class="amenity"><i data-lucide="bed-double"></i><span data-fr="6 chambres" data-en="6 bedrooms">6 chambres</span></div>
+    <div class="amenity"><i data-lucide="bath"></i><span data-fr="5 salles de bain" data-en="5 bathrooms">5 salles de bain</span></div>
+    <div class="amenity"><i data-lucide="square-parking"></i><span data-fr="3 places parking" data-en="3 parking spots">3 places parking</span></div>
+    <div class="amenity"><i data-lucide="wifi"></i><span data-fr="Wifi haut débit" data-en="High-speed Wifi">Wifi haut débit</span></div>
+    <div class="amenity"><i data-lucide="tv"></i><span data-fr="TV dans les chambres" data-en="TV in bedrooms">TV dans les chambres</span></div>
+    <div class="amenity"><i data-lucide="chef-hat"></i><span data-fr="Cuisine équipée" data-en="Equipped kitchen">Cuisine équipée</span></div>
+    <div class="amenity"><i data-lucide="washing-machine"></i><span data-fr="Lave-linge / sèche-linge" data-en="Washer / dryer">Lave-linge / sèche-linge</span></div>
+    <div class="amenity"><i data-lucide="dog"></i><span data-fr="Animaux acceptés" data-en="Pets allowed">Animaux acceptés</span></div>
+    <div class="amenity"><i data-lucide="sparkles"></i><span data-fr="Ménage inclus" data-en="Cleaning included">Ménage inclus</span></div>
+    <div class="amenity"><i data-lucide="bed"></i><span data-fr="Draps fournis" data-en="Linens provided">Draps fournis</span></div>
+    <div class="amenity"><i data-lucide="hand-platter"></i><span data-fr="Serviettes fournies" data-en="Towels provided">Serviettes fournies</span></div>
+  </div>
+</section>
+
+<!-- ============== LOCATION ============== -->
+<section class="location" id="location">
+  <div class="location-text">
+    <div class="section-tag" data-fr="— Localisation" data-en="— Location">— Localisation</div>
+    <h2 class="section-title" data-fr="La Plagne <em>Montalbert</em>" data-en="La Plagne <em>Montalbert</em>">
+      La Plagne <em>Montalbert</em>
+    </h2>
+    <p data-fr="Versant boisé, exposition plein sud, accès direct au domaine Paradiski — l'un des plus grands au monde. Le village authentique de Montalbert préserve son âme savoyarde à 10 minutes des grandes pistes."
+       data-en="Wooded southern slopes, direct access to the Paradiski domain — one of the largest in the world. The authentic village of Montalbert preserves its Savoyard soul, 10 minutes from the main runs.">
+      Versant boisé, exposition plein sud, accès direct au domaine Paradiski — l'un des plus grands au monde. Le village authentique de Montalbert préserve son âme savoyarde à 10 minutes des grandes pistes.
+    </p>
+
+    <div class="location-rows">
+      <div class="loc-row">
+        <i data-lucide="map-pin"></i>
+        <div>
+          <strong data-fr="Adresse" data-en="Address">Adresse</strong>
+          <span>1321 route des Centres, La Plagne Montalbert (73210)</span>
+        </div>
+      </div>
+      <div class="loc-row">
+        <i data-lucide="snowflake"></i>
+        <div>
+          <strong data-fr="Domaine skiable" data-en="Ski domain">Domaine skiable</strong>
+          <span data-fr="Paradiski — 425 km de pistes" data-en="Paradiski — 425 km of slopes">Paradiski — 425 km de pistes</span>
+        </div>
+      </div>
+      <div class="loc-row">
+        <i data-lucide="train"></i>
+        <div>
+          <strong data-fr="Gare la plus proche" data-en="Nearest station">Gare la plus proche</strong>
+          <span>Aime-La Plagne (15 min)</span>
+        </div>
+      </div>
+      <div class="loc-row">
+        <i data-lucide="plane"></i>
+        <div>
+          <strong data-fr="Aéroports" data-en="Airports">Aéroports</strong>
+          <span>Chambéry (1h30) · Lyon (2h30) · Genève (2h45)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="location-map">
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=6.6300%2C45.5050%2C6.7000%2C45.5450&amp;layer=mapnik&amp;marker=45.5260%2C6.6650"
+      style="border:0; width:100%; height:100%;"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- ============== PRICING ============== -->
+<section class="pricing">
+  <div class="pricing-content">
+    <div class="section-tag" data-fr="— Tarifs" data-en="— Pricing">— Tarifs</div>
+    <h2 class="section-title" data-fr="À partir de <em>2 900€</em> la semaine"
+                              data-en="From <em>€2,900</em> per week">
+      À partir de <em>2 900€</em> la semaine
+    </h2>
+    <p data-fr="Tarif indicatif basse saison, location entière du chalet. Les tarifs varient selon la période : haute saison, vacances scolaires, fêtes de fin d'année. Devis personnalisé sur demande."
+       data-en="Indicative low-season rate for the entire chalet. Rates vary by period: high season, school holidays, year-end festivities. Personalized quote on request.">
+      Tarif indicatif basse saison, location entière du chalet. Les tarifs varient selon la période : haute saison, vacances scolaires, fêtes de fin d'année. Devis personnalisé sur demande.
+    </p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tag" data-fr="Basse saison" data-en="Low season">Basse saison</div>
+        <div class="price-amount">2 900€<small data-fr="/sem." data-en="/wk.">/sem.</small></div>
+        <div class="price-period" data-fr="Hors vacances scolaires" data-en="Outside school holidays">Hors vacances scolaires</div>
+      </div>
+      <div class="price-card price-card-featured">
+        <div class="price-tag" data-fr="Haute saison" data-en="High season">Haute saison</div>
+        <div class="price-amount" data-fr="Sur demande" data-en="On request">Sur demande</div>
+        <div class="price-period" data-fr="Vacances de février, Noël, Nouvel An" data-en="February holidays, Christmas, New Year">Vacances de février, Noël, Nouvel An</div>
+      </div>
+      <div class="price-card">
+        <div class="price-tag" data-fr="Été" data-en="Summer">Été</div>
+        <div class="price-amount" data-fr="Sur demande" data-en="On request">Sur demande</div>
+        <div class="price-period" data-fr="Juin à septembre" data-en="June to September">Juin à septembre</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BOOKING ============== -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-left">
+      <div class="section-tag" data-fr="— Réservation" data-en="— Booking">— Réservation</div>
+      <h2 class="section-title" data-fr="Réservez <em>votre séjour</em>" data-en="Book <em>your stay</em>">
+        Réservez <em>votre séjour</em>
+      </h2>
+      <p data-fr="Choisissez vos dates et nous revenons vers vous sous 24h avec un devis personnalisé et la confirmation de disponibilité."
+         data-en="Choose your dates and we'll come back to you within 24h with a personalized quote and availability confirmation.">
+        Choisissez vos dates et nous revenons vers vous sous 24h avec un devis personnalisé et la confirmation de disponibilité.
+      </p>
+
+      <div class="booking-contact">
+        <a href="mailto:[EMAIL]" class="booking-direct">
+          <i data-lucide="mail"></i>
+          <span>[EMAIL]</span>
+        </a>
+        <a href="https://wa.me/[WHATSAPP]" target="_blank" rel="noopener" class="booking-direct">
+          <i data-lucide="message-circle"></i>
+          <span>WhatsApp · [+33 WHATSAPP]</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="booking-form" id="bookingForm" novalidate>
+      <div class="form-row form-row-double">
+        <div class="form-field">
+          <label for="arrival" data-fr="Arrivée" data-en="Arrival">Arrivée</label>
+          <input type="text" id="arrival" name="arrival" placeholder="Date" required readonly />
+        </div>
+        <div class="form-field">
+          <label for="departure" data-fr="Départ" data-en="Departure">Départ</label>
+          <input type="text" id="departure" name="departure" placeholder="Date" required readonly />
+        </div>
+      </div>
+
+      <div class="form-row form-row-double">
+        <div class="form-field">
+          <label for="guests" data-fr="Voyageurs" data-en="Guests">Voyageurs</label>
+          <select id="guests" name="guests" required>
+            <option value="">—</option>
+            <option value="1-4">1–4</option>
+            <option value="5-8">5–8</option>
+            <option value="9-12">9–12</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="name" data-fr="Nom complet" data-en="Full name">Nom complet</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+      </div>
+
+      <div class="form-row form-row-double">
+        <div class="form-field">
+          <label for="email" data-fr="Email" data-en="Email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-field">
+          <label for="phone" data-fr="Téléphone" data-en="Phone">Téléphone</label>
+          <input type="tel" id="phone" name="phone" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="message" data-fr="Message (optionnel)" data-en="Message (optional)">Message (optionnel)</label>
+        <textarea id="message" name="message" rows="3" placeholder="Précisez vos attentes, occasion spéciale, animaux..."></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">
+        <span data-fr="Envoyer la demande" data-en="Send request">Envoyer la demande</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+        <path d="M15 75 L32 38 L48 56 L65 28 L85 75 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <strong>Chalets de la Grande Ourse</strong>
+        <span data-fr="Propriété privée" data-en="Private property">Propriété privée</span>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4 data-fr="Contact" data-en="Contact">Contact</h4>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <a href="https://wa.me/[WHATSAPP]" target="_blank" rel="noopener">WhatsApp · [+33 WHATSAPP]</a>
+      </div>
+      <div>
+        <h4 data-fr="Adresse" data-en="Address">Adresse</h4>
+        <span>1321 route des Centres</span>
+        <span>73210 La Plagne Montalbert</span>
+        <span>France</span>
+      </div>
+      <div>
+        <h4 data-fr="Navigation" data-en="Navigation">Navigation</h4>
+        <a href="#manifesto" data-fr="Le chalet" data-en="The chalet">Le chalet</a>
+        <a href="#gallery" data-fr="Galerie" data-en="Gallery">Galerie</a>
+        <a href="#booking" data-fr="Réserver" data-en="Book">Réserver</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Chalets de la Grande Ourse</span>
+    <span data-fr="Site conçu avec soin" data-en="Site crafted with care">Site conçu avec soin</span>
+  </div>
+</footer>
+
+</main>
+
+<!-- WhatsApp flottant -->
+<a href="https://wa.me/[WHATSAPP]" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.6 6.32A8 8 0 0 0 4 12.05c0 1.4.36 2.78 1.05 4L4 20l4.04-1.05A8 8 0 0 0 20 12.05a8 8 0 0 0-2.4-5.73M12 18.7a6.65 6.65 0 0 1-3.4-.93l-.24-.15-2.5.65.67-2.43-.16-.25a6.65 6.65 0 0 1 10.06-8.32 6.65 6.65 0 0 1-4.43 11.43m3.65-4.97c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1s-.5.65-.62.78c-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.6-.53-1-1.18-1.12-1.38-.11-.2-.01-.31.09-.41.1-.1.2-.23.3-.35.1-.11.13-.2.2-.33.06-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.38-.01a.73.73 0 0 0-.53.25c-.18.2-.7.68-.7 1.66s.71 1.92.81 2.05c.1.13 1.4 2.15 3.4 3.01.47.21.84.33 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.95.17-.46.17-.86.12-.94-.05-.1-.18-.15-.38-.25"/>
+  </svg>
+</a>
+
+<script src="script.js" defer></script>
+</body>
+</html>
