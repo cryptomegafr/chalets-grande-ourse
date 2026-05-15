@@ -38,10 +38,10 @@ const CONFIG = {
 document.addEventListener('DOMContentLoaded', () => {
   // Remplace [EMAIL] et [WHATSAPP] dans le HTML
   document.querySelectorAll('a[href="mailto:[EMAIL]"]').forEach(a => {
-    a.href = `mailto:${CONFIG.email}?subject=Demande de réservation — Chalets de la Grande Ourse`;
+    a.href = `mailto:${CONFIG.email}?subject=Demande de réservation — Chalet ASTRO`;
   });
   document.querySelectorAll('a[href="https://wa.me/[WHATSAPP]"]').forEach(a => {
-    a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Bonjour, je suis intéressé(e) par une réservation aux Chalets de la Grande Ourse.')}`;
+    a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Bonjour, je suis intéressé(e) par une réservation du chalet ASTRO.')}`;
   });
   document.querySelectorAll('*').forEach(el => {
     if (el.children.length === 0 && el.textContent.includes('[EMAIL]')) {
@@ -485,7 +485,7 @@ form.addEventListener('submit', async (e) => {
     const subject = `Demande de réservation — ${name}`;
     const body = `Bonjour,
 
-Je souhaite réserver les Chalets de la Grande Ourse :
+Je souhaite réserver le chalet ASTRO (Résidence Grande Ourse) :
 
 • Arrivée : ${arrival}
 • Départ : ${departure}
@@ -513,4 +513,5 @@ ${name}`;
   
   submit.disabled = false;
   submit.querySelector('span').textContent = originalText;
+});
 });
