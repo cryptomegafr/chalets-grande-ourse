@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Tous les bots peuvent tout indexer
+# Sitemap pour faciliter le crawl
+Sitemap: https://cryptomegafr.github.io/chalets-grande-ourse/sitemap.xml
+
+# Bots spécifiques
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
