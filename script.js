@@ -69,12 +69,11 @@ window.addEventListener('load', () => {
 });
 
 // ====================================================
-//  SMOOTH SCROLL (natif, rapide)
+//  SCROLL (100% natif, pas de smooth)
 // ====================================================
-// Lenis désactivé pour un scroll plus réactif
 let lenis = null;
 
-// Scroll smooth sur les liens d'ancre (natif)
+// Scroll natif rapide sur les liens d'ancre
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
     const target = document.querySelector(link.getAttribute('href'));
@@ -82,7 +81,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       e.preventDefault();
       const offset = 80;
       const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo(0, top);
       // Fermer menu mobile si ouvert
       document.getElementById('mobileMenu').classList.remove('open');
       document.getElementById('menuBurger').classList.remove('open');
