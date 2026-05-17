@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- SEO -->
+<title>Activités à La Plagne Montalbert — Que faire | Chalet ASTRO</title>
+<meta name="description" content="Que faire à La Plagne Montalbert : ski, bobsleigh olympique, chiens de traîneau, parapente, raquettes, spa... Toutes les activités hiver et été autour du Chalet ASTRO." />
+<meta name="keywords" content="activités La Plagne Montalbert, bobsleigh La Plagne, chiens de traîneau, parapente Paradiski, raquettes Montalbert, que faire La Plagne, activités hiver La Plagne, activités été Paradiski" />
+<meta name="author" content="Pierre Beaulier" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://chaletastro.com/activites.html" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Activités à La Plagne Montalbert — Chalet ASTRO" />
+<meta property="og:description" content="Bobsleigh olympique, parapente, chiens de traîneau, spa, raquettes... Découvrez tout ce qui vous attend autour du Chalet ASTRO." />
+<meta property="og:url" content="https://chaletastro.com/activites.html" />
+<meta property="og:image" content="https://chaletastro.com/images/12-terrasse-vue.jpg" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f0d0a'/%3E%3Cpath d='M20 70 L35 40 L50 55 L65 30 L80 70 Z' fill='%23d4a574' stroke='%23d4a574' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<!-- Polices -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<link rel="stylesheet" href="style.css" />
+
+<style>
+  /* ===== STYLES SPÉCIFIQUES PAGE ACTIVITÉS ===== */
+  
+  .activities-hero {
+    position: relative;
+    min-height: 70vh;
+    min-height: 70svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--pad-x);
+    color: var(--c-cream);
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .activities-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  
+  .activities-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .activities-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+  }
+  
+  .activities-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+  
+  .activities-hero h1 {
+    font-family: var(--f-display);
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+  }
+  
+  .activities-hero h1 em {
+    font-style: italic;
+    color: var(--c-accent);
+  }
+  
+  .activities-hero p {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.95;
+  }
+  
+  /* Season tabs */
+  .season-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem var(--pad-x) 0;
+    background: var(--c-bg);
+  }
+  
+  .season-tab {
+    background: none;
+    border: 1px solid var(--c-line);
+    color: var(--c-ink-soft);
+    padding: 0.8rem 2rem;
+    border-radius: 100px;
+    font-family: var(--f-body);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  
+  .season-tab i {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .season-tab:hover {
+    border-color: var(--c-accent);
+    color: var(--c-ink);
+  }
+  
+  .season-tab.active {
+    background: var(--c-ink);
+    color: var(--c-cream);
+    border-color: var(--c-ink);
+  }
+  
+  /* Sections saisons */
+  .season-section {
+    padding: var(--pad-y) var(--pad-x);
+    display: none;
+  }
+  
+  .season-section.active {
+    display: block;
+  }
+  
+  .season-section.winter {
+    background: var(--c-bg);
+  }
+  
+  .season-section.summer {
+    background: var(--c-bg-alt);
+  }
+  
+  .season-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+  }
+  
+  .season-intro p {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--c-ink-soft);
+  }
+  
+  /* Grille d'activités */
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .activity-card {
+    background: var(--c-cream);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--c-line-soft);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .activity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  }
+  
+  .activity-card-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--c-stone);
+  }
+  
+  .activity-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .activity-card:hover .activity-card-image img {
+    transform: scale(1.05);
+  }
+  
+  .activity-icon-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2a2520 0%, #4a4035 100%);
+    color: var(--c-accent);
+  }
+  
+  .activity-icon-bg i {
+    width: 60px;
+    height: 60px;
+    stroke-width: 1;
+  }
+  
+  .activity-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(26, 24, 20, 0.85);
+    backdrop-filter: blur(8px);
+    color: var(--c-cream);
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .activity-tag.adrenaline { background: rgba(184, 76, 62, 0.9); }
+  .activity-tag.famille { background: rgba(85, 130, 95, 0.9); }
+  .activity-tag.bien-etre { background: rgba(138, 96, 145, 0.9); }
+  .activity-tag.gastronomie { background: rgba(184, 118, 62, 0.9); }
+  .activity-tag.nature { background: rgba(85, 116, 145, 0.9); }
+  
+  .activity-card-content {
+    padding: 1.75rem 1.5rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .activity-card-content h3 {
+    font-family: var(--f-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+    color: var(--c-ink);
+  }
+  
+  .activity-card-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--c-ink-soft);
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+  
+  .activity-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.78rem;
+    color: var(--c-ink-mute);
+  }
+  
+  .activity-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .activity-meta i {
+    width: 13px;
+    height: 13px;
+  }
+  
+  .activity-link {
+    color: var(--c-accent-deep);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: color 0.3s ease, gap 0.3s ease;
+  }
+  
+  .activity-link:hover {
+    color: var(--c-accent);
+    gap: 0.7rem;
+  }
+  
+  .activity-link i {
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* Section CTA en bas */
+  .activities-cta {
+    padding: var(--pad-y) var(--pad-x);
+    background: var(--c-ink);
+    color: var(--c-cream);
+    text-align: center;
+  }
+  
+  .activities-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .activities-cta h2 {
+    font-family: var(--f-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  
+  .activities-cta h2 em {
+    color: var(--c-accent);
+    font-style: italic;
+  }
+  
+  .activities-cta p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 2.5rem;
+  }
+  
+  .activities-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--c-accent);
+    color: var(--c-cream);
+    padding: 1.1rem 2rem;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  
+  .activities-cta-btn:hover {
+    transform: translateY(-3px);
+    background: var(--c-accent-deep);
+  }
+  
+  .activities-cta-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  @media (max-width: 640px) {
+    .season-tabs {
+      flex-direction: column;
+      align-items: center;
+    }
+    .season-tab {
+      width: 200px;
+      justify-content: center;
+    }
+    .activities-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="nav scrolled" id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+      <path d="M15 75 L32 38 L48 56 L65 28 L85 75 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">
+      <span class="logo-line-1">Résidence Grande Ourse</span>
+      <span class="logo-line-2">Chalet ASTRO</span>
+    </span>
+  </a>
+
+  <nav class="nav-links">
+    <a href="index.html#manifesto" data-fr="Le chalet" data-en="The chalet">Le chalet</a>
+    <a href="index.html#gallery" data-fr="Galerie" data-en="Gallery">Galerie</a>
+    <a href="activites.html" class="active" data-fr="Activités" data-en="Activities">Activités</a>
+    <a href="index.html#location" data-fr="Localisation" data-en="Location">Localisation</a>
+    <a href="index.html#booking" data-fr="Réserver" data-en="Book" class="nav-cta">Réserver</a>
+  </nav>
+
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" aria-label="Changer de langue">
+      <span class="lang-current">FR</span>
+      <span class="lang-sep">/</span>
+      <span class="lang-alt">EN</span>
+    </button>
+    <button class="menu-burger" id="menuBurger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#manifesto" data-fr="Le chalet" data-en="The chalet">Le chalet</a>
+  <a href="index.html#gallery" data-fr="Galerie" data-en="Gallery">Galerie</a>
+  <a href="activites.html" data-fr="Activités" data-en="Activities">Activités</a>
+  <a href="index.html#location" data-fr="Localisation" data-en="Location">Localisation</a>
+  <a href="index.html#booking" data-fr="Réserver" data-en="Book">Réserver</a>
+</div>
+
+<main>
+
+<!-- ============== HERO ============== -->
+<section class="activities-hero">
+  <div class="activities-hero-bg">
+    <img src="images/12-terrasse-vue.jpg" alt="Vue panoramique La Plagne Montalbert depuis le chalet ASTRO" />
+    <div class="activities-hero-overlay"></div>
+  </div>
+  <div class="activities-hero-content">
+    <h1 data-fr="Vivez les <em>Alpes</em>" data-en="Live the <em>Alps</em>">
+      Vivez les <em>Alpes</em>
+    </h1>
+    <p data-fr="Du ski olympique au spa de luxe, en passant par les chiens de traîneau et le parapente — La Plagne Montalbert et le domaine Paradiski offrent une infinité d'expériences."
+       data-en="From olympic skiing to luxury spa, dog sledding to paragliding — La Plagne Montalbert and the Paradiski domain offer endless experiences.">
+      Du ski olympique au spa de luxe, en passant par les chiens de traîneau et le parapente — La Plagne Montalbert et le domaine Paradiski offrent une infinité d'expériences.
+    </p>
+  </div>
+</section>
+
+<!-- ============== TABS SAISONS ============== -->
+<div class="season-tabs">
+  <button class="season-tab active" data-season="winter">
+    <i data-lucide="snowflake"></i>
+    <span data-fr="Hiver" data-en="Winter">Hiver</span>
+  </button>
+  <button class="season-tab" data-season="summer">
+    <i data-lucide="sun"></i>
+    <span data-fr="Été" data-en="Summer">Été</span>
+  </button>
+</div>
+
+<!-- ============== ACTIVITÉS HIVER ============== -->
+<section class="season-section winter active" id="winter">
+  <div class="season-intro">
+    <p data-fr="425 km de pistes, 134 remontées mécaniques, 3 glaciers — vous êtes au cœur de Paradiski, l'un des plus grands domaines skiables du monde."
+       data-en="425 km of slopes, 134 lifts, 3 glaciers — you're at the heart of Paradiski, one of the largest ski areas in the world.">
+      425 km de pistes, 134 remontées mécaniques, 3 glaciers — vous êtes au cœur de Paradiski, l'un des plus grands domaines skiables du monde.
+    </p>
+  </div>
+
+  <div class="activities-grid">
+
+    <!-- Ski Paradiski -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="snowflake"></i></div>
+        <span class="activity-tag" data-fr="Incontournable" data-en="Must-do">Incontournable</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Ski Paradiski — 425 km de pistes" data-en="Paradiski Skiing — 425 km of slopes">Ski Paradiski — 425 km de pistes</h3>
+        <p data-fr="Accès direct depuis le chalet aux pistes de Montalbert, reliées à La Plagne et aux Arcs via le Vanoise Express. Domaine adapté à tous les niveaux."
+           data-en="Direct access from the chalet to the Montalbert slopes, connected to La Plagne and Les Arcs via the Vanoise Express. For all levels.">
+          Accès direct depuis le chalet aux pistes de Montalbert, reliées à La Plagne et aux Arcs via le Vanoise Express. Domaine adapté à tous les niveaux.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1-7 jours</span>
+          <span><i data-lucide="users"></i> Tous niveaux</span>
+        </div>
+        <a href="https://www.la-plagne.com" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Forfaits Paradiski" data-en="Paradiski passes">Forfaits Paradiski</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Bobsleigh -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="zap"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Adrénaline" data-en="Adrenaline">Adrénaline</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Bobsleigh — Piste olympique" data-en="Bobsleigh — Olympic track">Bobsleigh — Piste olympique</h3>
+        <p data-fr="Dévalez les 19 virages de la piste olympique de La Plagne à 120 km/h. Bob-Raft, Speed-Luge ou Bob-Racing avec pilote — unique en France."
+           data-en="Race down the 19 turns of La Plagne's Olympic track at 120 km/h. Bob-Raft, Speed-Luge or Bob-Racing with pilot — unique in France.">
+          Dévalez les 19 virages de la piste olympique de La Plagne à 120 km/h. Bob-Raft, Speed-Luge ou Bob-Racing avec pilote — unique en France.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1h</span>
+          <span><i data-lucide="trending-up"></i> Jusqu'à 120 km/h</span>
+        </div>
+        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/glissez-sur-une-piste-de-bobsleigh-olympique" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver une descente" data-en="Book a run">Réserver une descente</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- First Tracks -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="sunrise"></i></div>
+        <span class="activity-tag" data-fr="Exclusif" data-en="Exclusive">Exclusif</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="First Tracks — Premier sur les pistes" data-en="First Tracks — First on the slopes">First Tracks — Premier sur les pistes</h3>
+        <p data-fr="Accompagné par les pisteurs, vivez un lever de soleil sur Paradiski, suivi des toutes premières traces sur les pistes fraîchement damées. Petit-déjeuner d'altitude inclus."
+           data-en="Accompanied by the ski patrol, experience sunrise over Paradiski, followed by the very first tracks on freshly groomed slopes. High-altitude breakfast included.">
+          Accompagné par les pisteurs, vivez un lever de soleil sur Paradiski, suivi des toutes premières traces sur les pistes fraîchement damées. Petit-déjeuner d'altitude inclus.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 3h</span>
+          <span><i data-lucide="sunrise"></i> Lever du soleil</span>
+        </div>
+        <a href="https://www.la-plagne.com/vos-rendez-vous-a-la-plagne/rendez-vous/first-track-montalbert-fornelet" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="En savoir plus" data-en="Learn more">En savoir plus</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Chiens de traîneau -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="dog"></i></div>
+        <span class="activity-tag famille" data-fr="Famille" data-en="Family">Famille</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Chiens de traîneau" data-en="Dog sledding">Chiens de traîneau</h3>
+        <p data-fr="Confortablement installés sur des peaux de rennes, laissez-vous guider par un musher professionnel à travers les forêts enneigées. Accessible dès 2 ans."
+           data-en="Comfortably seated on reindeer skins, let a professional musher guide you through snow-covered forests. Suitable from age 2.">
+          Confortablement installés sur des peaux de rennes, laissez-vous guider par un musher professionnel à travers les forêts enneigées. Accessible dès 2 ans.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1-3h</span>
+          <span><i data-lucide="users"></i> Dès 2 ans</span>
+        </div>
+        <a href="https://www.horstraceaventure.fr/" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver" data-en="Book">Réserver</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Tyrolienne Aiguille Rouge -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="wind"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Sensations" data-en="Thrills">Sensations</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Tyrolienne Aiguille Rouge — 2700m" data-en="Aiguille Rouge Zipline — 2700m">Tyrolienne Aiguille Rouge — 2700m</h3>
+        <p data-fr="70 secondes de vol à 130 km/h sur 1,8 km de descente vertigineuse au-dessus du domaine des Arcs. Solo, duo, assis ou allongé en mode rapace."
+           data-en="70 seconds of flight at 130 km/h over 1.8 km of vertiginous descent above the Arcs domain. Solo, duo, seated or lying down like a bird of prey.">
+          70 secondes de vol à 130 km/h sur 1,8 km de descente vertigineuse au-dessus du domaine des Arcs. Solo, duo, assis ou allongé en mode rapace.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 30 min</span>
+          <span><i data-lucide="trending-up"></i> 130 km/h</span>
+        </div>
+        <a href="https://www.lesarcs.com/activites-les-arcs/tyrolienne-de-laiguille-rouge" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver le grand frisson" data-en="Book the thrill">Réserver le grand frisson</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Raquettes -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="footprints"></i></div>
+        <span class="activity-tag nature" data-fr="Nature" data-en="Nature">Nature</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Randonnée raquettes" data-en="Snowshoe hiking">Randonnée raquettes</h3>
+        <p data-fr="Échappez à l'effervescence des pistes et découvrez les sentiers feutrés de Montalbert. Sorties accompagnées de jour ou au crépuscule avec un guide local."
+           data-en="Escape the bustle of the slopes and discover the quiet trails around Montalbert. Guided outings by day or at dusk with a local guide.">
+          Échappez à l'effervescence des pistes et découvrez les sentiers feutrés de Montalbert. Sorties accompagnées de jour ou au crépuscule avec un guide local.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 2-4h</span>
+          <span><i data-lucide="users"></i> Tous niveaux</span>
+        </div>
+        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/immergez-vous-au-coeur-de-l-hiver/raquettes-a-neige" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Découvrir les sorties" data-en="Discover outings">Découvrir les sorties</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Parapente -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="bird"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Sensations" data-en="Thrills">Sensations</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Parapente biplace" data-en="Tandem paragliding">Parapente biplace</h3>
+        <p data-fr="Décollez en biplace avec un moniteur depuis les hauteurs de Montalbert et survolez les sommets enneigés. Vue imprenable sur le Mont Blanc par temps clair."
+           data-en="Take off in tandem with an instructor from the heights of Montalbert and fly over the snow-covered peaks. Stunning view of Mont Blanc on clear days.">
+          Décollez en biplace avec un moniteur depuis les hauteurs de Montalbert et survolez les sommets enneigés. Vue imprenable sur le Mont Blanc par temps clair.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 20-30 min</span>
+          <span><i data-lucide="users"></i> Dès 6 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/parapente-a-la-plagne" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver un vol" data-en="Book a flight">Réserver un vol</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Over the Moon -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="moon"></i></div>
+        <span class="activity-tag" data-fr="Insolite" data-en="Unique">Insolite</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Over the Moon — Nuit en dameuse" data-en="Over the Moon — Night in a snowcat">Over the Moon — Nuit en dameuse</h3>
+        <p data-fr="Une suite haut de gamme dans une dameuse à 2000m. Baignoire balnéo, champagne, home cinéma, petit-déjeuner vue Mont-Blanc — une nuit hors du temps."
+           data-en="A luxury suite inside a snowcat at 2000m. Balneo bathtub, champagne, home cinema, breakfast with Mont Blanc view — a night out of time.">
+          Une suite haut de gamme dans une dameuse à 2000m. Baignoire balnéo, champagne, home cinéma, petit-déjeuner vue Mont-Blanc — une nuit hors du temps.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1 nuit</span>
+          <span><i data-lucide="heart"></i> En couple</span>
+        </div>
+        <a href="https://www.la-plagne.com/denichez-votre-hebergement/nuit-insolite-en-montagne/hebergements-insolites/over-the-moon" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Vivre l'expérience" data-en="Live the experience">Vivre l'expérience</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Cascade de glace -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="mountain"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Aventure" data-en="Adventure">Aventure</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Cascade de glace" data-en="Ice climbing">Cascade de glace</h3>
+        <p data-fr="Initiation à l'escalade sur glace avec un guide de haute montagne sur la tour de 24m de Champagny-en-Vanoise. Accessible débutants et confirmés."
+           data-en="Ice climbing initiation with a high-mountain guide on the 24m ice tower in Champagny-en-Vanoise. For beginners and experts alike.">
+          Initiation à l'escalade sur glace avec un guide de haute montagne sur la tour de 24m de Champagny-en-Vanoise. Accessible débutants et confirmés.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 3h</span>
+          <span><i data-lucide="users"></i> Dès 12 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/immergez-vous-au-coeur-de-l-hiver/escalade-sur-glace" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Se lancer" data-en="Get started">Se lancer</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Spa -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="flower-2"></i></div>
+        <span class="activity-tag bien-etre" data-fr="Bien-être" data-en="Wellness">Bien-être</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Spa & massages" data-en="Spa & massages">Spa & massages</h3>
+        <p data-fr="Après une journée de ski, place à la détente. Massage à domicile au chalet, ou accès au spa du complexe Mille8 à La Plagne (jacuzzi, sauna, hammam, piscine olympique)."
+           data-en="After a day of skiing, time to relax. In-chalet massage, or access to the Mille8 spa complex in La Plagne (jacuzzi, sauna, hammam, Olympic pool).">
+          Après une journée de ski, place à la détente. Massage à domicile au chalet, ou accès au spa du complexe Mille8 à La Plagne (jacuzzi, sauna, hammam, piscine olympique).
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1-3h</span>
+          <span><i data-lucide="home"></i> Au chalet possible</span>
+        </div>
+        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites/savourez-le-moment-detente-d-un-massage" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Voir les options" data-en="View options">Voir les options</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Forperet Taxi -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="utensils"></i></div>
+        <span class="activity-tag gastronomie" data-fr="Gastronomie" data-en="Gastronomy">Gastronomie</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Restaurant Le Forperet" data-en="Le Forperet Restaurant">Restaurant Le Forperet</h3>
+        <p data-fr="Restaurant d'altitude en pleine forêt, accessible en taxi-chenillette le soir depuis le chalet. Spécialités savoyardes dans un cadre magique sous la neige."
+           data-en="Mountain restaurant in the forest, accessible by snowcat-taxi in the evening from the chalet. Savoyard specialties in a magical snowy setting.">
+          Restaurant d'altitude en pleine forêt, accessible en taxi-chenillette le soir depuis le chalet. Spécialités savoyardes dans un cadre magique sous la neige.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> Soirée</span>
+          <span><i data-lucide="utensils"></i> Cuisine savoyarde</span>
+        </div>
+        <a href="https://forperet.com" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Voir le menu" data-en="View menu">Voir le menu</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Patinoire -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="star"></i></div>
+        <span class="activity-tag famille" data-fr="Famille" data-en="Family">Famille</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Patinoire & luge" data-en="Ice rink & sledding">Patinoire & luge</h3>
+        <p data-fr="Patinoires couvertes à La Plagne et pistes de luge dédiées à Montalbert. Idéal en fin de journée avec les enfants — accessible à tous, sans niveau requis."
+           data-en="Indoor ice rinks in La Plagne and dedicated sledding tracks in Montalbert. Ideal at the end of the day with kids — accessible to all, no skill required.">
+          Patinoires couvertes à La Plagne et pistes de luge dédiées à Montalbert. Idéal en fin de journée avec les enfants — accessible à tous, sans niveau requis.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1-2h</span>
+          <span><i data-lucide="users"></i> Tous âges</span>
+        </div>
+        <a href="https://www.la-plagne.com/savourez-une-multitude-d-activites" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Tarifs & horaires" data-en="Prices & hours">Tarifs & horaires</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== ACTIVITÉS ÉTÉ ============== -->
+<section class="season-section summer" id="summer">
+  <div class="season-intro">
+    <p data-fr="L'été à Montalbert, c'est 1 350 m d'altitude, l'air pur, les alpages fleuris, et un terrain de jeu infini pour la randonnée, le VTT et l'aventure."
+       data-en="Summer in Montalbert is 1,350 m of altitude, pure air, blooming alpine meadows, and an endless playground for hiking, mountain biking and adventure.">
+      L'été à Montalbert, c'est 1 350 m d'altitude, l'air pur, les alpages fleuris, et un terrain de jeu infini pour la randonnée, le VTT et l'aventure.
+    </p>
+  </div>
+
+  <div class="activities-grid">
+
+    <!-- Randonnée -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="mountain-snow"></i></div>
+        <span class="activity-tag nature" data-fr="Nature" data-en="Nature">Nature</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Randonnée — Parc de la Vanoise" data-en="Hiking — Vanoise National Park">Randonnée — Parc de la Vanoise</h3>
+        <p data-fr="Plus de 300 km de sentiers balisés au cœur du premier parc national de France. Lacs d'altitude, refuges, marmottes et bouquetins au programme."
+           data-en="Over 300 km of marked trails at the heart of France's first national park. High-altitude lakes, refuges, marmots and ibex along the way.">
+          Plus de 300 km de sentiers balisés au cœur du premier parc national de France. Lacs d'altitude, refuges, marmottes et bouquetins au programme.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 2h-jour</span>
+          <span><i data-lucide="users"></i> Tous niveaux</span>
+        </div>
+        <a href="https://www.vanoise-parcnational.fr" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Préparer sa rando" data-en="Plan your hike">Préparer sa rando</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- VTT -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="bike"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Sensations" data-en="Thrills">Sensations</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="VTT & Bike Park" data-en="Mountain biking & Bike Park">VTT & Bike Park</h3>
+        <p data-fr="Bike Park de La Plagne avec 13 pistes balisées, descente engagée ou enduro. Location de VTT électriques disponible pour explorer plus loin sans effort."
+           data-en="La Plagne Bike Park with 13 marked trails, committed downhill or enduro. Electric mountain bike rental available to explore further effortlessly.">
+          Bike Park de La Plagne avec 13 pistes balisées, descente engagée ou enduro. Location de VTT électriques disponible pour explorer plus loin sans effort.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1-jour</span>
+          <span><i data-lucide="users"></i> Dès 8 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/vtt-bike-park" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Découvrir le Bike Park" data-en="Discover the Bike Park">Découvrir le Bike Park</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Rafting -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="waves"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Sensations" data-en="Thrills">Sensations</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Rafting & Eaux vives" data-en="Rafting & Whitewater">Rafting & Eaux vives</h3>
+        <p data-fr="Descente de l'Isère en raft, hydrospeed ou canyoning dans les gorges des Tines. Sensations fortes garanties dans une nature spectaculaire."
+           data-en="Descent of the Isère River in raft, hydrospeed or canyoning in the Tines gorges. Strong sensations guaranteed in spectacular nature.">
+          Descente de l'Isère en raft, hydrospeed ou canyoning dans les gorges des Tines. Sensations fortes garanties dans une nature spectaculaire.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 2-3h</span>
+          <span><i data-lucide="users"></i> Dès 12 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/rafting-canyoning-hydrospeed" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver une descente" data-en="Book a descent">Réserver une descente</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Lac Pontet -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="droplet"></i></div>
+        <span class="activity-tag famille" data-fr="Famille" data-en="Family">Famille</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Baignade au lac de Montalbert" data-en="Swimming at Montalbert lake">Baignade au lac de Montalbert</h3>
+        <p data-fr="Petit lac aménagé à 5 minutes du chalet, idéal pour pique-niquer en famille, pêcher la truite ou simplement profiter de l'air pur d'altitude."
+           data-en="Small developed lake 5 minutes from the chalet, perfect for family picnics, trout fishing or simply enjoying the pure mountain air.">
+          Petit lac aménagé à 5 minutes du chalet, idéal pour pique-niquer en famille, pêcher la truite ou simplement profiter de l'air pur d'altitude.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> Journée</span>
+          <span><i data-lucide="users"></i> Famille</span>
+        </div>
+        <a href="https://www.la-plagne.com" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="En savoir plus" data-en="Learn more">En savoir plus</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Golf -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="flag"></i></div>
+        <span class="activity-tag" data-fr="Sport" data-en="Sport">Sport</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Golf de La Plagne" data-en="La Plagne Golf">Golf de La Plagne</h3>
+        <p data-fr="L'un des plus hauts golfs d'Europe à 2 000 m d'altitude. 18 trous panoramiques face au Mont Blanc, ouvert de juin à septembre."
+           data-en="One of Europe's highest golf courses at 2,000 m altitude. 18 panoramic holes facing Mont Blanc, open June to September.">
+          L'un des plus hauts golfs d'Europe à 2 000 m d'altitude. 18 trous panoramiques face au Mont Blanc, ouvert de juin à septembre.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 4-5h</span>
+          <span><i data-lucide="mountain"></i> 2000 m</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/golf" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver un parcours" data-en="Book a round">Réserver un parcours</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Parapente été -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="bird"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Sensations" data-en="Thrills">Sensations</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Parapente d'été" data-en="Summer paragliding">Parapente d'été</h3>
+        <p data-fr="Volez au-dessus des alpages fleuris et des sommets. Vol découverte ou vol thermique pour les plus expérimentés. Vue Mont Blanc, lacs et glaciers."
+           data-en="Fly over blooming alpine meadows and peaks. Discovery flight or thermal flight for the more experienced. Views of Mont Blanc, lakes and glaciers.">
+          Volez au-dessus des alpages fleuris et des sommets. Vol découverte ou vol thermique pour les plus expérimentés. Vue Mont Blanc, lacs et glaciers.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 30 min</span>
+          <span><i data-lucide="users"></i> Dès 6 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/parapente" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Décoller" data-en="Take off">Décoller</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Via Ferrata -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="link"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Aventure" data-en="Adventure">Aventure</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Via Ferrata des Bettières" data-en="Bettières Via Ferrata">Via Ferrata des Bettières</h3>
+        <p data-fr="Parcours sécurisé en falaise pour tous niveaux. Sensations fortes garanties à 1 800 m, avec passages aériens et pont de singe spectaculaires."
+           data-en="Secured cliff route for all levels. Strong sensations guaranteed at 1,800 m, with aerial passages and spectacular monkey bridges.">
+          Parcours sécurisé en falaise pour tous niveaux. Sensations fortes garanties à 1 800 m, avec passages aériens et pont de singe spectaculaires.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 3h</span>
+          <span><i data-lucide="users"></i> Dès 10 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/escalade-et-via-ferrata" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Se lancer" data-en="Get started">Se lancer</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Bobsleigh été -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="zap"></i></div>
+        <span class="activity-tag adrenaline" data-fr="Adrénaline" data-en="Adrenaline">Adrénaline</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Bobsleigh sur rails — été" data-en="Bobsleigh on rails — summer">Bobsleigh sur rails — été</h3>
+        <p data-fr="La piste olympique se vit aussi en été : descente sur le Bob-Raft auto-guidé sur rails, accessible à tous. Sensations 100% Olympic Park."
+           data-en="The Olympic track is also experienced in summer: descent on the self-guided Bob-Raft on rails, accessible to all. 100% Olympic Park feeling.">
+          La piste olympique se vit aussi en été : descente sur le Bob-Raft auto-guidé sur rails, accessible à tous. Sensations 100% Olympic Park.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1h</span>
+          <span><i data-lucide="users"></i> Dès 6 ans</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/bobsleigh-ete" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Réserver" data-en="Book">Réserver</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+    <!-- Spa été -->
+    <article class="activity-card">
+      <div class="activity-card-image">
+        <div class="activity-icon-bg"><i data-lucide="flower-2"></i></div>
+        <span class="activity-tag bien-etre" data-fr="Bien-être" data-en="Wellness">Bien-être</span>
+      </div>
+      <div class="activity-card-content">
+        <h3 data-fr="Spa Mille8 & yoga en altitude" data-en="Mille8 Spa & altitude yoga">Spa Mille8 & yoga en altitude</h3>
+        <p data-fr="Accès au complexe aqualudique Mille8 (jacuzzi, sauna, hammam). Cours de yoga sur les alpages le matin, face à la chaîne du Mont Blanc."
+           data-en="Access to the Mille8 aquatic complex (jacuzzi, sauna, hammam). Yoga classes on the alpine pastures in the morning, facing the Mont Blanc range.">
+          Accès au complexe aqualudique Mille8 (jacuzzi, sauna, hammam). Cours de yoga sur les alpages le matin, face à la chaîne du Mont Blanc.
+        </p>
+        <div class="activity-meta">
+          <span><i data-lucide="clock"></i> 1-3h</span>
+          <span><i data-lucide="heart"></i> Détente</span>
+        </div>
+        <a href="https://www.la-plagne.com/decouvrez-toutes-nos-activites-d-ete/bien-etre" target="_blank" rel="noopener" class="activity-link">
+          <span data-fr="Voir les options" data-en="View options">Voir les options</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== CTA FINAL ============== -->
+<section class="activities-cta">
+  <div class="activities-cta-content">
+    <h2 data-fr="Le chalet est <em>la base</em>. Les Alpes sont votre <em>terrain de jeu</em>."
+        data-en="The chalet is <em>the base</em>. The Alps are your <em>playground</em>.">
+      Le chalet est <em>la base</em>. Les Alpes sont votre <em>terrain de jeu</em>.
+    </h2>
+    <p data-fr="Nous pouvons vous aider à organiser votre séjour : réservations d'activités, transferts gare/aéroport, livraison de skis, chef à domicile, massages au chalet... Indiquez-nous vos envies à la réservation."
+       data-en="We can help you plan your stay: activity bookings, train/airport transfers, ski delivery, private chef, in-chalet massages... Let us know your wishes when booking.">
+      Nous pouvons vous aider à organiser votre séjour : réservations d'activités, transferts gare/aéroport, livraison de skis, chef à domicile, massages au chalet... Indiquez-nous vos envies à la réservation.
+    </p>
+    <a href="index.html#booking" class="activities-cta-btn">
+      <span data-fr="Réserver le chalet" data-en="Book the chalet">Réserver le chalet</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+        <path d="M15 75 L32 38 L48 56 L65 28 L85 75 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <strong>Chalet ASTRO</strong>
+        <span data-fr="Résidence Grande Ourse" data-en="Grande Ourse Residence">Résidence Grande Ourse</span>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4 data-fr="Contact" data-en="Contact">Contact</h4>
+        <a href="mailto:pi.beaulier@gmail.com">pi.beaulier@gmail.com</a>
+        <a href="https://wa.me/33607499945" target="_blank" rel="noopener">WhatsApp · +33 6 07 49 99 45</a>
+      </div>
+      <div>
+        <h4 data-fr="Adresse" data-en="Address">Adresse</h4>
+        <span>1321 route des Centres</span>
+        <span>73210 La Plagne Montalbert</span>
+        <span>France</span>
+      </div>
+      <div>
+        <h4 data-fr="Navigation" data-en="Navigation">Navigation</h4>
+        <a href="index.html#manifesto" data-fr="Le chalet" data-en="The chalet">Le chalet</a>
+        <a href="activites.html" data-fr="Activités" data-en="Activities">Activités</a>
+        <a href="index.html#booking" data-fr="Réserver" data-en="Book">Réserver</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Chalet ASTRO · Résidence Grande Ourse</span>
+    <span data-fr="Site conçu avec soin" data-en="Site crafted with care">Site conçu avec soin</span>
+  </div>
+</footer>
+
+</main>
+
+<!-- WhatsApp flottant -->
+<a href="https://wa.me/33607499945" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.6 6.32A8 8 0 0 0 4 12.05c0 1.4.36 2.78 1.05 4L4 20l4.04-1.05A8 8 0 0 0 20 12.05a8 8 0 0 0-2.4-5.73M12 18.7a6.65 6.65 0 0 1-3.4-.93l-.24-.15-2.5.65.67-2.43-.16-.25a6.65 6.65 0 0 1 10.06-8.32 6.65 6.65 0 0 1-4.43 11.43m3.65-4.97c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1s-.5.65-.62.78c-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.6-.53-1-1.18-1.12-1.38-.11-.2-.01-.31.09-.41.1-.1.2-.23.3-.35.1-.11.13-.2.2-.33.06-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.38-.01a.73.73 0 0 0-.53.25c-.18.2-.7.68-.7 1.66s.71 1.92.81 2.05c.1.13 1.4 2.15 3.4 3.01.47.21.84.33 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.95.17-.46.17-.86.12-.94-.05-.1-.18-.15-.38-.25"/>
+  </svg>
+</a>
+
+<script>
+// ====================================================
+//  ACTIVITÉS — Script de la page
+// ====================================================
+
+// Initialisation Lucide Icons
+if (typeof lucide !== 'undefined') lucide.createIcons();
+
+// ============ TABS SAISONS ============
+const tabs = document.querySelectorAll('.season-tab');
+const sections = document.querySelectorAll('.season-section');
+
+tabs.forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    const season = tab.dataset.season;
+    
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    
+    sections.forEach(function(s) {
+      s.classList.remove('active');
+      if (s.id === season) s.classList.add('active');
+    });
+    
+    // Anime les cartes de la section active
+    if (typeof gsap !== 'undefined') {
+      gsap.from('.season-section.active .activity-card', {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.05,
+        ease: 'power2.out'
+      });
+    }
+  });
+});
+
+// ============ MENU MOBILE ============
+const burger = document.getElementById('menuBurger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', function() {
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.classList.toggle('lock');
+});
+
+// Fermer menu mobile au clic sur un lien
+document.querySelectorAll('.mobile-menu a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.classList.remove('lock');
+  });
+});
+
+// ============ TOGGLE FR / EN ============
+const langToggle = document.getElementById('langToggle');
+let currentLang = 'fr';
+
+function translatePage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-fr]').forEach(function(el) {
+    const text = el.dataset[lang];
+    if (text) el.innerHTML = text;
+  });
+  if (lang === 'en') {
+    langToggle.classList.add('en');
+    langToggle.querySelector('.lang-current').textContent = 'EN';
+    langToggle.querySelector('.lang-alt').textContent = 'FR';
+  } else {
+    langToggle.classList.remove('en');
+    langToggle.querySelector('.lang-current').textContent = 'FR';
+    langToggle.querySelector('.lang-alt').textContent = 'EN';
+  }
+  localStorage.setItem('grandeourse_lang', lang);
+}
+
+langToggle.addEventListener('click', function() {
+  translatePage(currentLang === 'fr' ? 'en' : 'fr');
+});
+
+const savedLang = localStorage.getItem('grandeourse_lang');
+if (savedLang === 'en') translatePage('en');
+
+// ============ ANIMATIONS GSAP ============
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Hero
+  gsap.from('.activities-hero h1', {
+    y: 50,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power3.out'
+  });
+  gsap.from('.activities-hero p', {
+    y: 30,
+    opacity: 0,
+    duration: 1,
+    delay: 0.3,
+    ease: 'power2.out'
+  });
+  
+  // Cards initiales
+  gsap.from('.season-section.active .activity-card', {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.06,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.activities-grid',
+      start: 'top 85%'
+    }
+  });
+  
+  // CTA
+  gsap.from('.activities-cta-content > *', {
+    y: 30,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.15,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.activities-cta',
+      start: 'top 80%'
+    }
+  });
+}
+</script>
+
+</body>
+</html>
