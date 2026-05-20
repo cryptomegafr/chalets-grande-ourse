@@ -1942,3 +1942,25 @@ body::before {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Lien CTA sous la grille de tarifs */
+.pricing-cta-link {
+  text-align: center;
+  margin-top: 2.5rem;
+  margin-bottom: 0;
+}
+
+.pricing-cta-link a {
+  font-family: var(--f-body);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--c-accent);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.pricing-cta-link a:hover {
+  color: var(--c-cream);
+  border-bottom-color: var(--c-accent);
+}
