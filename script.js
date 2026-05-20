@@ -24,8 +24,55 @@ const CONFIG = {
     }
   },
   
-  // Dates indisponibles
-  unavailableDates: []
+  // ============================================
+  // 🗓️ DIMANCHES RÉSERVÉS (semaines bloquées)
+  // ============================================
+  // Ajoute ici les dimanches déjà réservés au format 'YYYY-MM-DD'
+  // Le dimanche bloqué = la SEMAINE qui commence ce jour-là est réservée
+  // Exemple : '2026-12-27' = semaine du 27/12 au 03/01 est réservée
+  bookedSundays: [
+    // '2026-12-27',
+    // '2027-01-03',
+  ],
+  
+  // ============================================
+  // 💰 GRILLE TARIFAIRE — Prix par semaine (7 nuits)
+  // ============================================
+  // Chaque entrée : la semaine commençant le dimanche YYYY-MM-DD
+  // coûte X euros pour 7 nuits (du dimanche au dimanche suivant)
+  // Si une semaine n'est PAS dans cette liste, le prix defaultWeeklyPrice est utilisé
+  //
+  // Tarifs définis par périodes :
+  //   - 20 déc → 2 janv  : 1 250 €/jour = 8 750 €/sem (Noël/Nouvel An)
+  //   - 3 janv → 6 fév   : 930 €/jour   = 6 510 €/sem (Janvier basse)
+  //   - 7 fév → 27 fév   : 1 250 €/jour = 8 750 €/sem (Vacances février)
+  //   - 28 fév → 4 avr   : 930 €/jour   = 6 510 €/sem (Fin saison ski)
+  //   - Reste de l'année : 500 €/jour   = 3 500 €/sem (par défaut)
+  weeklyPrices: {
+    // === SAISON SKI 2026-2027 ===
+    '2026-12-20': 8750,  // Noël/Nouvel An
+    '2026-12-27': 8750,  // Noël/Nouvel An
+    '2027-01-03': 6510,  // Janvier basse saison
+    '2027-01-10': 6510,  // Janvier basse saison
+    '2027-01-17': 6510,  // Janvier basse saison
+    '2027-01-24': 6510,  // Janvier basse saison
+    '2027-01-31': 6510,  // Janvier basse saison
+    '2027-02-07': 8750,  // Vacances de février
+    '2027-02-14': 8750,  // Vacances de février
+    '2027-02-21': 8750,  // Vacances de février
+    '2027-02-28': 6510,  // Fin de saison ski
+    '2027-03-07': 6510,  // Fin de saison ski
+    '2027-03-14': 6510,  // Fin de saison ski
+    '2027-03-21': 6510,  // Fin de saison ski
+    '2027-03-28': 6510,  // Fin de saison ski
+    '2027-04-04': 6510,  // Fin de saison ski
+  },
+  
+  // Prix par défaut si la semaine n'est pas dans la grille (500€/jour × 7)
+  defaultWeeklyPrice: 3500,
+  
+  // Devise (€ par défaut)
+  currency: '€'
 };
 
 // ====================================================
@@ -316,34 +363,285 @@ window.addEventListener('load', function() {
 });
 
 // ====================================================
-//  FLATPICKR CALENDRIER
+//  CALENDRIER CUSTOM — Dimanche à dimanche
 // ====================================================
-window.addEventListener('load', function() {
-  if (typeof flatpickr === 'undefined') return;
+(function() {
+  const calGrid = document.getElementById('calGrid');
+  const calTitle = document.getElementById('calTitle');
+  const calPrev = document.getElementById('calPrev');
+  const calNext = document.getElementById('calNext');
+  const arrivalInput = document.getElementById('arrival');
+  const departureInput = document.getElementById('departure');
+  const priceSummary = document.getElementById('priceSummary');
   
-  const baseConfig = {
-    locale: 'fr',
-    dateFormat: 'd/m/Y',
-    minDate: 'today',
-    disable: CONFIG.unavailableDates || [],
-    showMonths: window.innerWidth > 768 ? 2 : 1,
-    monthSelectorType: 'static'
-  };
+  if (!calGrid) return;
   
-  let departurePicker = null;
+  const MOIS_FR = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+  const MOIS_EN = ['January', 'February', 'March', 'April', 'May', 'June',
+                   'July', 'August', 'September', 'October', 'November', 'December'];
+  const JOURS_FR = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+  const JOURS_EN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   
-  const arrivalPicker = flatpickr('#arrival', Object.assign({}, baseConfig, {
-    onChange: function(selectedDates) {
-      if (selectedDates[0] && departurePicker) {
-        const minDep = new Date(selectedDates[0]);
-        minDep.setDate(minDep.getDate() + 1);
-        departurePicker.set('minDate', minDep);
+  let currentDate = new Date();
+  currentDate.setDate(1);
+  
+  // Limite mini : mois actuel
+  const minMonth = new Date();
+  minMonth.setDate(1);
+  minMonth.setHours(0, 0, 0, 0);
+  
+  // État de sélection
+  let arrivalDate = null;
+  let departureDate = null;
+  
+  // Helpers
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function formatISO(d) {
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function formatDisplay(d) {
+    return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
+  }
+  function formatLong(d, lang) {
+    const mois = lang === 'en' ? MOIS_EN : MOIS_FR;
+    return d.getDate() + ' ' + mois[d.getMonth()].toLowerCase() + ' ' + d.getFullYear();
+  }
+  function isSunday(d) { return d.getDay() === 0; }
+  function isSameDay(d1, d2) {
+    return d1 && d2 &&
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate();
+  }
+  function isBefore(d1, d2) {
+    return d1.getTime() < d2.getTime();
+  }
+  function isBooked(date) {
+    if (!isSunday(date)) return false;
+    return CONFIG.bookedSundays.indexOf(formatISO(date)) !== -1;
+  }
+  function getWeeklyPrice(sundayDate) {
+    const iso = formatISO(sundayDate);
+    return CONFIG.weeklyPrices[iso] || CONFIG.defaultWeeklyPrice;
+  }
+  function formatPrice(p) {
+    return p.toLocaleString('fr-FR') + ' ' + CONFIG.currency;
+  }
+  
+  // Rendu du calendrier
+  function renderCalendar() {
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+    const mois = lang === 'en' ? MOIS_EN : MOIS_FR;
+    const jours = lang === 'en' ? JOURS_EN : JOURS_FR;
+    
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    calTitle.textContent = mois[month] + ' ' + year;
+    
+    // Boutons navigation
+    const prevDate = new Date(year, month - 1, 1);
+    calPrev.disabled = prevDate < minMonth;
+    
+    // Grille
+    calGrid.innerHTML = '';
+    
+    // En-têtes jours (lundi → dimanche)
+    jours.forEach(function(j) {
+      const d = document.createElement('div');
+      d.className = 'calendar-weekday';
+      d.textContent = j;
+      calGrid.appendChild(d);
+    });
+    
+    // Premier jour du mois (en mode lundi = 0)
+    const firstDay = new Date(year, month, 1);
+    let startCol = firstDay.getDay() - 1; // dim = 0 → -1 = 6
+    if (startCol < 0) startCol = 6;
+    
+    // Cases vides
+    for (let i = 0; i < startCol; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'calendar-day empty';
+      calGrid.appendChild(empty);
+    }
+    
+    // Jours du mois
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(year, month, d);
+      const dayEl = document.createElement('div');
+      dayEl.className = 'calendar-day';
+      
+      const numSpan = document.createElement('span');
+      numSpan.textContent = d;
+      dayEl.appendChild(numSpan);
+      
+      const isPast = isBefore(date, today);
+      const sunday = isSunday(date);
+      
+      if (isPast) dayEl.classList.add('past');
+      
+      if (sunday) {
+        dayEl.classList.add('sunday');
+        
+        // Prix sous le numéro
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'day-price';
+        const weeklyPrice = getWeeklyPrice(date);
+        // Formatage : 8750 → "8,7k"  / 3500 → "3,5k"  / 6510 → "6,5k"
+        const priceInK = (weeklyPrice / 1000).toFixed(1).replace('.', ',');
+        priceSpan.textContent = priceInK + 'k' + CONFIG.currency;
+        dayEl.appendChild(priceSpan);
+        
+        // Réservé ?
+        if (isBooked(date)) {
+          dayEl.classList.add('booked');
+        }
+        
+        // États de sélection
+        if (arrivalDate && isSameDay(date, arrivalDate)) {
+          dayEl.classList.add('selected-arrival');
+        }
+        if (departureDate && isSameDay(date, departureDate)) {
+          dayEl.classList.add('selected-departure');
+        }
+        if (arrivalDate && departureDate &&
+            isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
+          dayEl.classList.add('in-range');
+        }
+        
+        // Click handler (seulement si pas passé et pas réservé)
+        if (!isPast && !isBooked(date)) {
+          dayEl.addEventListener('click', function() {
+            handleSundayClick(date);
+          });
+        }
+      } else if (arrivalDate && departureDate &&
+                 isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
+        // Jours en semaine entre arrivée et départ
+        dayEl.classList.add('in-range');
+      }
+      
+      calGrid.appendChild(dayEl);
+    }
+  }
+  
+  // Gestion clic sur dimanche
+  function handleSundayClick(date) {
+    // Cas 1 : aucune date sélectionnée → c'est l'arrivée
+    if (!arrivalDate) {
+      arrivalDate = date;
+      departureDate = null;
+    }
+    // Cas 2 : arrivée déjà sélectionnée mais pas de départ
+    else if (arrivalDate && !departureDate) {
+      // Si on reclique sur la même date OU avant → on réinitialise avec cette nouvelle arrivée
+      if (isSameDay(date, arrivalDate) || isBefore(date, arrivalDate)) {
+        arrivalDate = date;
+        departureDate = null;
+      } else {
+        // Vérifier qu'il n'y a pas de semaine réservée entre les deux
+        if (hasBookedWeekBetween(arrivalDate, date)) {
+          arrivalDate = date;
+          departureDate = null;
+        } else {
+          departureDate = date;
+        }
       }
     }
-  }));
+    // Cas 3 : les deux étaient sélectionnés → reset et nouvelle arrivée
+    else {
+      arrivalDate = date;
+      departureDate = null;
+    }
+    
+    // Mettre à jour les champs cachés
+    arrivalInput.value = arrivalDate ? formatDisplay(arrivalDate) : '';
+    departureInput.value = departureDate ? formatDisplay(departureDate) : '';
+    
+    renderCalendar();
+    updatePriceSummary();
+  }
   
-  departurePicker = flatpickr('#departure', baseConfig);
-});
+  // Vérifie s'il y a une semaine bloquée entre 2 dimanches
+  function hasBookedWeekBetween(start, end) {
+    const cur = new Date(start);
+    while (cur < end) {
+      if (isBooked(cur)) return true;
+      cur.setDate(cur.getDate() + 7);
+    }
+    return false;
+  }
+  
+  // Calcul + affichage du récap prix
+  function updatePriceSummary() {
+    if (!arrivalDate || !departureDate) {
+      priceSummary.style.display = 'none';
+      return;
+    }
+    
+    // Nombre de nuits = différence en jours
+    const ms = departureDate - arrivalDate;
+    const nights = Math.round(ms / (1000 * 60 * 60 * 24));
+    const weeks = nights / 7;
+    
+    // Total : somme des prix de chaque semaine couverte
+    let total = 0;
+    const cur = new Date(arrivalDate);
+    while (cur < departureDate) {
+      total += getWeeklyPrice(cur);
+      cur.setDate(cur.getDate() + 7);
+    }
+    
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+    
+    // Affichage
+    document.getElementById('psPeriod').textContent = 
+      formatLong(arrivalDate, lang) + ' → ' + formatLong(departureDate, lang);
+    
+    const nightsLabel = nights + ' ' + (lang === 'en' ? 'nights' : (nights > 1 ? 'nuits' : 'nuit'));
+    const nightlyAvg = Math.round(total / nights);
+    document.getElementById('psNightsLabel').textContent = nightsLabel + ' × ' + formatPrice(nightlyAvg);
+    document.getElementById('psNightsValue').textContent = formatPrice(total);
+    document.getElementById('psTotal').textContent = formatPrice(total);
+    
+    priceSummary.style.display = 'block';
+    
+    // Animation d'apparition
+    priceSummary.style.animation = 'none';
+    priceSummary.offsetHeight; // reflow
+    priceSummary.style.animation = 'fadeIn 0.4s ease';
+  }
+  
+  // Navigation
+  calPrev.addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+  });
+  calNext.addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+  });
+  
+  // Rendu initial
+  renderCalendar();
+  
+  // Réagir au changement de langue
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle) {
+    langToggle.addEventListener('click', function() {
+      setTimeout(function() {
+        renderCalendar();
+        updatePriceSummary();
+      }, 50);
+    });
+  }
+})();
 
 // ====================================================
 //  FORMULAIRE — envoi vers Google Form
