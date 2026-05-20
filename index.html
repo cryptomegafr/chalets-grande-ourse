@@ -686,16 +686,38 @@
     </div>
 
     <form class="booking-form" id="bookingForm" novalidate>
-      <div class="form-row form-row-double">
-        <div class="form-field">
-          <label for="arrival" data-fr="Arrivée" data-en="Arrival">Arrivée</label>
-          <input type="text" id="arrival" name="arrival" placeholder="Date" required readonly />
+      
+      <!-- Calendrier custom dimanche à dimanche -->
+      <div class="booking-calendar">
+        <div class="calendar-header">
+          <button type="button" class="calendar-nav" id="calPrev" aria-label="Mois précédent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <div class="calendar-title" id="calTitle">Mois Année</div>
+          <button type="button" class="calendar-nav" id="calNext" aria-label="Mois suivant">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
         </div>
-        <div class="form-field">
-          <label for="departure" data-fr="Départ" data-en="Departure">Départ</label>
-          <input type="text" id="departure" name="departure" placeholder="Date" required readonly />
+        
+        <div class="calendar-grid" id="calGrid">
+          <!-- Généré par JS -->
         </div>
+        
+        <div class="calendar-legend">
+          <span class="legend-item"><i class="dot dot-avail"></i> <span data-fr="Disponible" data-en="Available">Disponible</span></span>
+          <span class="legend-item"><i class="dot dot-booked"></i> <span data-fr="Réservé" data-en="Booked">Réservé</span></span>
+          <span class="legend-item"><i class="dot dot-selected"></i> <span data-fr="Sélectionné" data-en="Selected">Sélectionné</span></span>
+        </div>
+        
+        <p class="calendar-hint" data-fr="Location du dimanche au dimanche · Cliquez sur un dimanche d'arrivée puis un dimanche de départ"
+                                 data-en="Sunday to Sunday rental · Click on an arrival Sunday then a departure Sunday">
+          Location du dimanche au dimanche · Cliquez sur un dimanche d'arrivée puis un dimanche de départ
+        </p>
       </div>
+
+      <!-- Champs cachés pour soumission -->
+      <input type="hidden" id="arrival" name="arrival" />
+      <input type="hidden" id="departure" name="departure" />
 
       <div class="form-row form-row-double">
         <div class="form-field">
@@ -727,6 +749,29 @@
       <div class="form-field">
         <label for="message" data-fr="Message (optionnel)" data-en="Message (optional)">Message (optionnel)</label>
         <textarea id="message" name="message" rows="3" placeholder="Précisez vos attentes, occasion spéciale, animaux..."></textarea>
+      </div>
+
+      <!-- Récap prix (apparaît quand une période est sélectionnée) -->
+      <div class="price-summary" id="priceSummary" style="display:none;">
+        <div class="price-summary-header">
+          <span class="eyebrow" data-fr="Estimation" data-en="Estimate">— Estimation</span>
+        </div>
+        <div class="price-summary-row">
+          <span class="ps-label" data-fr="Période" data-en="Period">Période</span>
+          <span class="ps-value" id="psPeriod">—</span>
+        </div>
+        <div class="price-summary-row">
+          <span class="ps-label" id="psNightsLabel">7 nuits</span>
+          <span class="ps-value" id="psNightsValue">—</span>
+        </div>
+        <div class="price-summary-row price-summary-total">
+          <span class="ps-label" data-fr="Total" data-en="Total">Total</span>
+          <span class="ps-value" id="psTotal">—</span>
+        </div>
+        <p class="price-summary-note" data-fr="Estimation indicative. Ménage et linge inclus. Le tarif définitif vous sera confirmé sous 24h."
+                                      data-en="Indicative estimate. Cleaning and linen included. Final rate confirmed within 24h.">
+          Estimation indicative. Ménage et linge inclus. Le tarif définitif vous sera confirmé sous 24h.
+        </p>
       </div>
 
       <button type="submit" class="form-submit">
