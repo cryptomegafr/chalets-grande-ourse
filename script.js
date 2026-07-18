@@ -343,23 +343,54 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 }
 
 // ====================================================
-//  SWIPER GALERIE
+//  SWIPER GALERIES (Chalet + Environnement)
 // ====================================================
 window.addEventListener('load', function() {
   if (typeof Swiper === 'undefined') return;
+  
+  // Galerie principale (Le chalet)
   new Swiper('.gallery-swiper', {
     slidesPerView: 'auto',
     spaceBetween: 20,
     grabCursor: true,
     loop: true,
     speed: 800,
-    pagination: { el: '.swiper-pagination', clickable: true },
-    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    pagination: { 
+      el: '.gallery-swiper .swiper-pagination', 
+      clickable: true 
+    },
+    navigation: { 
+      nextEl: '.gallery-swiper .swiper-button-next', 
+      prevEl: '.gallery-swiper .swiper-button-prev' 
+    },
     breakpoints: {
       640: { spaceBetween: 30 },
       1024: { spaceBetween: 40 }
     }
   });
+  
+  // Galerie environnement (paysages)
+  if (document.querySelector('.environment-swiper')) {
+    new Swiper('.environment-swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 20,
+      grabCursor: true,
+      loop: true,
+      speed: 800,
+      pagination: { 
+        el: '.environment-swiper .swiper-pagination', 
+        clickable: true 
+      },
+      navigation: { 
+        nextEl: '.environment-swiper .swiper-button-next', 
+        prevEl: '.environment-swiper .swiper-button-prev' 
+      },
+      breakpoints: {
+        640: { spaceBetween: 30 },
+        1024: { spaceBetween: 40 }
+      }
+    });
+  }
 });
 
 // ====================================================
