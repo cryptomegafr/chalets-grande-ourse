@@ -1964,3 +1964,184 @@ body::before {
   color: var(--c-cream);
   border-bottom-color: var(--c-accent);
 }
+
+
+/* ============================================
+   SECTION CLASSEMENTS & RECONNAISSANCES
+   ============================================ */
+
+.rankings {
+  padding: var(--pad-y) var(--pad-x);
+  background: var(--c-bg);
+  text-align: center;
+}
+
+.rankings-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rankings-title {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: var(--c-ink);
+}
+
+.rankings-title em {
+  font-style: italic;
+  color: var(--c-accent);
+}
+
+.rankings-lead {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.rankings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ranking-card {
+  background: var(--c-cream);
+  border: 1px solid var(--c-line-soft);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.ranking-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+}
+
+.ranking-card-featured {
+  background: linear-gradient(135deg, var(--c-ink) 0%, #2a2520 100%);
+  color: var(--c-cream);
+  border-color: var(--c-ink);
+}
+
+.ranking-card-featured:hover {
+  box-shadow: 0 25px 50px rgba(184, 118, 62, 0.2);
+}
+
+.ranking-icon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1.5rem;
+  color: var(--c-accent);
+}
+
+.ranking-card-featured .ranking-icon {
+  color: var(--c-accent);
+}
+
+.ranking-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ranking-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-accent-deep);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.ranking-card-featured .ranking-eyebrow {
+  color: var(--c-accent);
+}
+
+.ranking-name {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--c-ink);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.ranking-card-featured .ranking-name {
+  color: var(--c-cream);
+}
+
+.ranking-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.ranking-card-featured .ranking-desc {
+  color: rgba(245, 240, 232, 0.85);
+}
+
+.ranking-issuer {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--c-ink-mute);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--c-line-soft);
+  width: 100%;
+}
+
+.ranking-card-featured .ranking-issuer {
+  color: rgba(245, 240, 232, 0.6);
+  border-top-color: rgba(245, 240, 232, 0.15);
+}
+
+@media (max-width: 640px) {
+  .rankings-grid {
+    grid-template-columns: 1fr;
+  }
+  .ranking-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Figure avec plan / photo légendée dans le guide */
+.guide-figure {
+  margin: 2.5rem 0;
+  padding: 0;
+}
+.guide-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--c-line-soft);
+  display: block;
+}
+.guide-figure figcaption {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--c-ink-soft);
+  text-align: center;
+  line-height: 1.6;
+}
+.guide-figure figcaption strong {
+  font-style: normal;
+  color: var(--c-accent-deep);
+  font-weight: 500;
+}
