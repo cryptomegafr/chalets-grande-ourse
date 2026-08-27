@@ -33,10 +33,9 @@ const CONFIG = {
   bookedSundays: [
     // '2026-12-27',
     // '2027-01-03',
-    '2027-01-10', // Réservé : 10 jan → 17 jan
-    '2027-01-17', // Réservé : 17 jan → 24 jan
-    '2027-01-24', // Réservé : 24 jan → 31 jan
-    '2027-01-31', // Réservé : 31 jan → 7 fév
+    '2027-01-17', // Réservé : 17 jan → 24 jan (arrivée bloquée)
+    '2027-01-24', // Réservé : 24 jan → 31 jan (arrivée bloquée)
+    '2027-01-31', // Réservé : 31 jan → 7 fév  (arrivée bloquée)
     '2027-03-14', // Réservé : 14 mar → 21 mar
     '2026-08-02', // Réservé : août 2026
     '2026-08-09', // Réservé : août 2026
