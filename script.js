@@ -6,7 +6,7 @@
 //  CONFIG
 // ====================================================
 const CONFIG = {
-  email: 'pi.beaulier@gmail.com',
+  email: 'pibeaulier@gmail.com',
   whatsapp: '33607499945',
   whatsappDisplay: '+33 6 07 49 99 45',
   
