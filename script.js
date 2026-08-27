@@ -36,7 +36,7 @@ const CONFIG = {
     '2027-01-17', // Réservé : 17 jan → 24 jan (arrivée bloquée)
     '2027-01-24', // Réservé : 24 jan → 31 jan (arrivée bloquée)
     '2027-01-31', // Réservé : 31 jan → 7 fév  (arrivée bloquée)
-    '2027-03-14', // Réservé : 14 mar → 21 mar
+    '2027-03-21', // Réservé : 14 mar → 21 mar (arrivée bloquée)
     '2026-08-02', // Réservé : août 2026
     '2026-08-09', // Réservé : août 2026
     '2026-08-16', // Réservé : août 2026
