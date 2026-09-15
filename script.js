@@ -466,15 +466,17 @@ window.addEventListener('load', function() {
     if (!isSunday(date)) return false;
     return CONFIG.bookedSundays.indexOf(formatISO(date)) !== -1;
   }
-  // Retourne le dimanche de la semaine du jour donné
+  // Retourne le dimanche qui COMMENCE la semaine (dim-sam) d'un jour donné
+  // Semaine = dim → sam, donc le dimanche précédent (ou le jour lui-même si dim)
   function getSundayOfWeek(date) {
     const d = new Date(date);
-    const day = d.getDay(); // 0=dim, 1=lun...6=sam
-    const diff = day === 0 ? 0 : 7 - day;
-    d.setDate(d.getDate() + diff);
+    const day = d.getDay(); // 0=dim
+    if (day !== 0) {
+      d.setDate(d.getDate() - day); // reculer au dimanche précédent
+    }
     return d;
   }
-  // Vrai si un jour (non-dimanche) appartient à une semaine réservée
+  // Vrai si un jour (non-dimanche) appartient à une semaine réservée (dim-sam)
   function isInBookedWeek(date) {
     if (isSunday(date)) return false;
     const sun = getSundayOfWeek(date);
