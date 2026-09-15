@@ -560,7 +560,7 @@ window.addEventListener('load', function() {
           dayEl.classList.add('in-range');
         }
         
-        // Click handler — un dimanche réservé reste cliquable (départ ou arrivée adjacente)
+        // Click handler — tous les dimanches sont cliquables (rouge = visuel uniquement)
         if (!isPast) {
           dayEl.addEventListener('click', function() {
             handleSundayClick(date);
@@ -590,13 +590,7 @@ window.addEventListener('load', function() {
         arrivalDate = date;
         departureDate = null;
       } else {
-        // Vérifier qu'il n'y a pas de semaine réservée entre les deux
-        if (hasBookedWeekBetween(arrivalDate, date)) {
-          arrivalDate = date;
-          departureDate = null;
-        } else {
-          departureDate = date;
-        }
+        departureDate = date;
       }
     }
     // Cas 3 : les deux étaient sélectionnés → reset et nouvelle arrivée
