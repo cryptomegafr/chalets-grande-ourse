@@ -466,6 +466,20 @@ window.addEventListener('load', function() {
     if (!isSunday(date)) return false;
     return CONFIG.bookedSundays.indexOf(formatISO(date)) !== -1;
   }
+  // Retourne le dimanche de la semaine du jour donné
+  function getSundayOfWeek(date) {
+    const d = new Date(date);
+    const day = d.getDay(); // 0=dim, 1=lun...6=sam
+    const diff = day === 0 ? 0 : 7 - day;
+    d.setDate(d.getDate() + diff);
+    return d;
+  }
+  // Vrai si un jour (non-dimanche) appartient à une semaine réservée
+  function isInBookedWeek(date) {
+    if (isSunday(date)) return false;
+    const sun = getSundayOfWeek(date);
+    return CONFIG.bookedSundays.indexOf(formatISO(sun)) !== -1;
+  }
   function getWeeklyPrice(sundayDate) {
     const iso = formatISO(sundayDate);
     return CONFIG.weeklyPrices[iso] || CONFIG.defaultWeeklyPrice;
@@ -543,10 +557,8 @@ window.addEventListener('load', function() {
         priceSpan.textContent = priceInK + 'k' + CONFIG.currency;
         dayEl.appendChild(priceSpan);
         
-        // Réservé ?
-        if (isBooked(date)) {
-          dayEl.classList.add('booked');
-        }
+        // Dimanche réservé : on garde l'apparence normale (cliquable avec prix)
+        // On ne lui ajoute plus la classe 'booked' pour ne pas le bloquer visuellement
         
         // États de sélection
         if (arrivalDate && isSameDay(date, arrivalDate)) {
@@ -566,10 +578,16 @@ window.addEventListener('load', function() {
             handleSundayClick(date);
           });
         }
-      } else if (arrivalDate && departureDate &&
-                 isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
-        // Jours en semaine entre arrivée et départ
-        dayEl.classList.add('in-range');
+      } else {
+        // Jours en semaine (lun→sam)
+        if (arrivalDate && departureDate &&
+            isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
+          dayEl.classList.add('in-range');
+        }
+        // Semaine réservée : barrer les jours lun→sam
+        if (isInBookedWeek(date)) {
+          dayEl.classList.add('booked-week');
+        }
       }
       
       calGrid.appendChild(dayEl);
