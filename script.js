@@ -466,19 +466,6 @@ window.addEventListener('load', function() {
     if (!isSunday(date)) return false;
     return CONFIG.bookedSundays.indexOf(formatISO(date)) !== -1;
   }
-  // Vrai si le dimanche est bloqué comme arrivée (affichage rouge)
-  function isBookedArrival(date) {
-    return isBooked(date);
-  }
-  // Vrai si le dimanche peut être utilisé comme départ
-  // Un dimanche booked PEUT être départ si la semaine précédente est aussi bloquée
-  function canBeUsedAsDeparture(date) {
-    if (!isBooked(date)) return true;
-    // Vérifier si le dimanche précédent (= début de semaine précédente) est aussi bloqué
-    const prevSunday = new Date(date);
-    prevSunday.setDate(prevSunday.getDate() - 7);
-    return isBooked(prevSunday);
-  }
   function getWeeklyPrice(sundayDate) {
     const iso = formatISO(sundayDate);
     return CONFIG.weeklyPrices[iso] || CONFIG.defaultWeeklyPrice;
@@ -573,15 +560,11 @@ window.addEventListener('load', function() {
           dayEl.classList.add('in-range');
         }
         
-        // Click handler
-        // Un dimanche réservé reste cliquable comme DÉPART si une arrivée est déjà choisie
-        // et que la semaine précédente est aussi réservée (= fin d'un bloc réservé)
-        const clickable = !isPast && (!isBooked(date) || (arrivalDate && !departureDate && canBeUsedAsDeparture(date)));
-        if (clickable) {
+        // Click handler — un dimanche réservé reste cliquable (départ ou arrivée adjacente)
+        if (!isPast) {
           dayEl.addEventListener('click', function() {
             handleSundayClick(date);
           });
-          if (isBooked(date)) dayEl.classList.add('booked-departure'); // style optionnel
         }
       } else if (arrivalDate && departureDate &&
                  isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
