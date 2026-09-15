@@ -31,7 +31,7 @@ const CONFIG = {
   // Le dimanche bloqué = la SEMAINE qui commence ce jour-là est réservée
   // Exemple : '2026-12-27' = semaine du 27/12 au 03/01 est réservée
   bookedSundays: [
-    // '2026-12-27',
+    '2026-12-27', // Réservé : 27 déc → 3 jan (arrivée bloquée)
     // '2027-01-03',
     '2027-01-17', // Réservé : 17 jan → 24 jan (arrivée bloquée)
     '2027-01-24', // Réservé : 24 jan → 31 jan (arrivée bloquée)
