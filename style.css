@@ -1746,7 +1746,7 @@ body::before {
 }
 
 .calendar-day.sunday.booked {
-  cursor: not-allowed;
+  cursor: pointer;
   background: rgba(180, 60, 60, 0.08);
   border-color: rgba(180, 60, 60, 0.3);
   color: rgba(180, 60, 60, 0.7);
@@ -1758,17 +1758,9 @@ body::before {
   display: none;
 }
 
-.calendar-day.sunday.booked::after {
-  content: '✕';
-  position: absolute;
-  font-size: 0.75rem;
-  color: rgba(180, 60, 60, 0.6);
-  bottom: 4px;
-}
-
 .calendar-day.sunday.booked:hover {
-  transform: none;
-  background: rgba(180, 60, 60, 0.12);
+  transform: translateY(-1px);
+  background: rgba(180, 60, 60, 0.14);
 }
 
 /* États sélectionnés */
