@@ -1745,22 +1745,11 @@ body::before {
   background: transparent;
 }
 
-.calendar-day.sunday.booked {
-  cursor: pointer;
-  background: rgba(180, 60, 60, 0.08);
-  border-color: rgba(180, 60, 60, 0.3);
-  color: rgba(180, 60, 60, 0.7);
+/* Jours lun→sam d'une semaine réservée : barrés, style discret */
+.calendar-day.booked-week {
+  color: rgba(180, 60, 60, 0.5);
   text-decoration: line-through;
-  font-weight: 400;
-}
-
-.calendar-day.sunday.booked .day-price {
-  display: none;
-}
-
-.calendar-day.sunday.booked:hover {
-  transform: translateY(-1px);
-  background: rgba(180, 60, 60, 0.14);
+  background: rgba(180, 60, 60, 0.04);
 }
 
 /* États sélectionnés */
