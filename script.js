@@ -31,11 +31,13 @@ const CONFIG = {
   // Le dimanche bloqué = la SEMAINE qui commence ce jour-là est réservée
   // Exemple : '2026-12-27' = semaine du 27/12 au 03/01 est réservée
   bookedSundays: [
+    '2026-12-13', // Réservé : semaine 13 déc → 20 déc (14-19 barrés)
     '2026-12-27', // Réservé : semaine Nouvel An (27 déc → 3 jan)
     '2027-01-10', // Réservé : semaine 10 jan → 17 jan
     '2027-01-17', // Réservé : semaine 17 jan → 24 jan
     '2027-01-24', // Réservé : semaine 24 jan → 31 jan
     '2027-01-31', // Réservé : semaine 31 jan → 7 fév
+    '2027-02-28', // Réservé : semaine 28 fév → 7 mar (1-6 mars barrés)
     '2027-03-14', // Réservé : semaine 14 mar → 21 mar
     '2026-08-02', // Réservé : août 2026
     '2026-08-09', // Réservé : août 2026
@@ -466,22 +468,6 @@ window.addEventListener('load', function() {
     if (!isSunday(date)) return false;
     return CONFIG.bookedSundays.indexOf(formatISO(date)) !== -1;
   }
-  // Retourne le dimanche qui COMMENCE la semaine (dim-sam) d'un jour donné
-  // Semaine = dim → sam, donc le dimanche précédent (ou le jour lui-même si dim)
-  function getSundayOfWeek(date) {
-    const d = new Date(date);
-    const day = d.getDay(); // 0=dim
-    if (day !== 0) {
-      d.setDate(d.getDate() - day); // reculer au dimanche précédent
-    }
-    return d;
-  }
-  // Vrai si un jour (non-dimanche) appartient à une semaine réservée (dim-sam)
-  function isInBookedWeek(date) {
-    if (isSunday(date)) return false;
-    const sun = getSundayOfWeek(date);
-    return CONFIG.bookedSundays.indexOf(formatISO(sun)) !== -1;
-  }
   function getWeeklyPrice(sundayDate) {
     const iso = formatISO(sundayDate);
     return CONFIG.weeklyPrices[iso] || CONFIG.defaultWeeklyPrice;
@@ -559,8 +545,10 @@ window.addEventListener('load', function() {
         priceSpan.textContent = priceInK + 'k' + CONFIG.currency;
         dayEl.appendChild(priceSpan);
         
-        // Dimanche réservé : on garde l'apparence normale (cliquable avec prix)
-        // On ne lui ajoute plus la classe 'booked' pour ne pas le bloquer visuellement
+        // Réservé ?
+        if (isBooked(date)) {
+          dayEl.classList.add('booked');
+        }
         
         // États de sélection
         if (arrivalDate && isSameDay(date, arrivalDate)) {
@@ -580,16 +568,10 @@ window.addEventListener('load', function() {
             handleSundayClick(date);
           });
         }
-      } else {
-        // Jours en semaine (lun→sam)
-        if (arrivalDate && departureDate &&
-            isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
-          dayEl.classList.add('in-range');
-        }
-        // Semaine réservée : barrer les jours lun→sam
-        if (isInBookedWeek(date)) {
-          dayEl.classList.add('booked-week');
-        }
+      } else if (arrivalDate && departureDate &&
+                 isBefore(arrivalDate, date) && isBefore(date, departureDate)) {
+        // Jours en semaine entre arrivée et départ
+        dayEl.classList.add('in-range');
       }
       
       calGrid.appendChild(dayEl);
